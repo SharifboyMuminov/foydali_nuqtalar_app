@@ -25,4 +25,29 @@ class AuthRepository {
         email: email,
         activateCode: activateCode,
       );
+
+  Future<NetworkResponse> login({
+    required String email,
+    required String password,
+  }) =>
+      _apiProvider.login(
+        email: email,
+        password: password,
+      );
+
+  Future<NetworkResponse> resetPassword({required String email}) =>
+      _apiProvider.resetPassword(email: email);
+
+  Future<NetworkResponse> resetPasswordConfirm({
+    required String email,
+    required String activateCode,
+    required String newPassword,
+    required String confirmPassword,
+  }) =>
+      _apiProvider.resetPasswordConfirm(
+        email: email,
+        activateCode: activateCode,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      );
 }
