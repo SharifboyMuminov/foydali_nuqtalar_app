@@ -5,7 +5,7 @@ import 'package:foydali_nuqtalar/data/models/network_response.dart';
 import 'package:foydali_nuqtalar/data/models/user/user_model.dart';
 
 class ApiProvider extends ApiClient {
-  //TODO Auth ------------------------------------------------------------
+  //TODO Start Auth ------------------------------------------------------------
 
   Future<NetworkResponse> register({
     required String email,
