@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foydali_nuqtalar/screens/auth/log_in/log_in_screen.dart';
+import 'package:foydali_nuqtalar/screens/auth/verification/verification_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_button.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
@@ -91,7 +92,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   20.getH(),
                   GlobalMyButton(
                     margin: EdgeInsets.zero,
-                    onTab: () {},
+                    onTab: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const VerificationScreen();
+                          },
+                        ),
+                      );
+                    },
                     title: "Ro‘yxatdan o‘tish",
                   ),
                   20.getH(),

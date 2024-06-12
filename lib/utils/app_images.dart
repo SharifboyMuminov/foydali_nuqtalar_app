@@ -9,6 +9,7 @@ class AppImages {
   static String circlesSvg = "assets/icons/circles.svg";
   static String googleLogoSvg = "assets/icons/google_logo.svg";
   static String appleLogoSvg = "assets/icons/apple_logo.svg";
+  static String arrowBackSvg = "assets/icons/arrow_back.svg";
 
 //Image
 }
