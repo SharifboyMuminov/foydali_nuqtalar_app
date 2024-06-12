@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'screens/home_screen/home_screen.dart';
+import 'package:foydali_nuqtalar/screens/splash/splash_screen.dart';
+import 'package:foydali_nuqtalar/utils/app_colors.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,11 +26,14 @@ class MyApp extends StatelessWidget {
         ScreenUtil.init(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(useMaterial3: false),
+          theme: ThemeData(
+            useMaterial3: true,
+            scaffoldBackgroundColor: AppColors.white,
+          ),
           home: child,
         );
       },
-      child: HomeScreen(),
+      child: const SplashScreen(),
     );
   }
 }

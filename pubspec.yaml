@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   shared_preferences: ^2.2.3
   flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -84,3 +85,6 @@ flutter:
         - asset: assets/fonts/roboto/RobotoSlab-Regular.ttf
         - asset: assets/fonts/roboto/RobotoSlab-SemiBold.ttf
         - asset: assets/fonts/roboto/RobotoSlab-Thin.ttf
+    - family: PollerOne
+      fonts:
+        - asset: assets/fonts/poller_one/PollerOne-Regular.ttf
