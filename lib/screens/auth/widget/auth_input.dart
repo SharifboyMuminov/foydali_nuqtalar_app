@@ -9,18 +9,26 @@ class AuthMyInput extends StatelessWidget {
     super.key,
     required this.textEditingController,
     required this.hintText,
-    this.textInputType, this.textInputAction,
+    this.textInputType,
+    this.textInputAction,
+    this.iconData,
+    this.obscureText,
+    this.onTabEye,
   });
 
   final TextEditingController textEditingController;
   final String hintText;
+  final IconData? iconData;
+  final bool? obscureText;
+  final VoidCallback? onTabEye;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textInputAction:textInputAction ?? TextInputAction.next,
+      obscureText: obscureText ?? false,
+      textInputAction: textInputAction ?? TextInputAction.next,
       keyboardType: textInputType ?? TextInputType.text,
       style: AppTextStyle.seoulRobotoSemiBold.copyWith(
         fontSize: 16.sp,
@@ -47,6 +55,15 @@ class AuthMyInput extends StatelessWidget {
           color: AppColors.c010A27.withOpacity(0.60),
           fontSize: 16.sp,
         ),
+        suffixIcon: iconData != null
+            ? IconButton(
+                onPressed: onTabEye,
+                icon: Icon(
+                  iconData,
+                  size: 24.we,
+                ),
+              )
+            : null,
       ),
     );
   }
