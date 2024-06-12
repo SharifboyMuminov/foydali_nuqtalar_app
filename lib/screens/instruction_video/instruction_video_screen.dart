@@ -25,72 +25,70 @@ class _InstructionVideoScreenState extends State<InstructionVideoScreen> {
         decoration: BoxDecoration(
           color: AppColors.cF07448.withOpacity(0.08),
         ),
-        child: Expanded(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              SvgPicture.asset(
-                AppImages.circlesSvg,
-                fit: BoxFit.fill,
-                width: width,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            SvgPicture.asset(
+              AppImages.circlesSvg,
+              fit: BoxFit.fill,
+              width: width,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.we),
+              child: Image.asset(
+                "assets/images/img.png",
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.we),
-                child: Image.asset(
-                  "assets/images/img.png",
-                ),
-              ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 60.he),
-                  child: Text(
-                    "Video qo’llanma",
-                    style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      color: AppColors.c010A27,
-                      fontSize: 20.sp,
-                    ),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.only(top: 60.he),
+                child: Text(
+                  "Video qo’llanma",
+                  style: AppTextStyle.seoulRobotoRegular.copyWith(
+                    color: AppColors.c010A27,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GlobalMyButton(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 20.we,
-                        vertical: 4.he,
-                      ),
-                      onTab: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const SignUpScreen();
-                            },
-                          ),
-                        );
-                      },
-                      title: "Profilga kirish",
-                      titleColor: AppColors.c010A27,
-                      backgroundColor: AppColors.white,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GlobalMyButton(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 20.we,
+                      vertical: 4.he,
                     ),
-                    GlobalMyButton(
-                      onTab: () {},
-                      title: "Kitobni o’qish",
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 20.we,
-                        vertical: 4.he,
-                      ),
+                    onTab: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const SignUpScreen();
+                          },
+                        ),
+                      );
+                    },
+                    title: "Profilga kirish",
+                    titleColor: AppColors.c010A27,
+                    backgroundColor: AppColors.white,
+                  ),
+                  GlobalMyButton(
+                    onTab: () {},
+                    title: "Kitobni o’qish",
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 20.we,
+                      vertical: 4.he,
                     ),
-                    20.getH(),
-                  ],
-                ),
+                  ),
+                  20.getH(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

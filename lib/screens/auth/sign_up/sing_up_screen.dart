@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_state.dart';
 import 'package:foydali_nuqtalar/screens/auth/log_in/log_in_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/verification/verification_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_button.dart';
@@ -37,127 +40,134 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.we, vertical: 16.he),
-              child: Column(
-                children: [
-                  AuthMyButton(
-                    onTab: () {},
-                    title: "Google orqali kirish",
-                    iconPathSvg: AppImages.googleLogoSvg,
-                  ),
-                  12.getH(),
-                  AuthMyButton(
-                    onTab: () {},
-                    title: "Apple orqali kirish",
-                    iconPathSvg: AppImages.appleLogoSvg,
-                  ),
-                  20.getH(),
-                  Text(
-                    "Yoki",
-                    style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      color: AppColors.c010A27.withOpacity(0.40),
-                      fontSize: 16.sp,
-                    ),
-                  ),
-                  20.getH(),
-                  AuthMyInput(
-                    textEditingController: controllerName,
-                    hintText: 'Ismingiz',
-                  ),
-                  12.getH(),
-                  AuthMyInput(
-                    textInputType: TextInputType.emailAddress,
-                    textEditingController: controllerEmail,
-                    hintText: 'Elektron pochta',
-                  ),
-                  12.getH(),
-                  AuthMyInput(
-                    textInputAction: TextInputAction.done,
-                    textEditingController: controllerPassword,
-                    hintText: 'Parol',
-                    isPasswordInput: obscureText,
-                    obscureText: obscureText,
-                    onTabEye: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
-                  ),
-                  20.getH(),
-                  GlobalMyButton(
-                    margin: EdgeInsets.zero,
-                    onTab: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const VerificationScreen();
-                          },
-                        ),
-                      );
-                    },
-                    title: "Ro‘yxatdan o‘tish",
-                  ),
-                  20.getH(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+      body: BlocConsumer<AuthBloc, AuthState>(
+        builder: (BuildContext context, AuthState state) {
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.we, vertical: 16.he),
+                  child: Column(
                     children: [
+                      AuthMyButton(
+                        onTab: () {},
+                        title: "Google orqali kirish",
+                        iconPathSvg: AppImages.googleLogoSvg,
+                      ),
+                      12.getH(),
+                      AuthMyButton(
+                        onTab: () {},
+                        title: "Apple orqali kirish",
+                        iconPathSvg: AppImages.appleLogoSvg,
+                      ),
+                      20.getH(),
                       Text(
-                        "Profilngiz bormi?",
+                        "Yoki",
                         style: AppTextStyle.seoulRobotoRegular.copyWith(
-                          color: AppColors.c010A27,
+                          color: AppColors.c010A27.withOpacity(0.40),
                           fontSize: 16.sp,
                         ),
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.r),
-                          ),
-                        ),
-                        onPressed: () {
+                      20.getH(),
+                      AuthMyInput(
+                        textEditingController: controllerName,
+                        hintText: 'Ismingiz',
+                      ),
+                      12.getH(),
+                      AuthMyInput(
+                        textInputType: TextInputType.emailAddress,
+                        textEditingController: controllerEmail,
+                        hintText: 'Elektron pochta',
+                      ),
+                      12.getH(),
+                      AuthMyInput(
+                        textInputAction: TextInputAction.done,
+                        textEditingController: controllerPassword,
+                        hintText: 'Parol',
+                        isPasswordInput: obscureText,
+                        obscureText: obscureText,
+                        onTabEye: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                      ),
+                      20.getH(),
+                      GlobalMyButton(
+                        margin: EdgeInsets.zero,
+                        onTab: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return const LoginInScreen();
+                                return const VerificationScreen();
                               },
                             ),
                           );
                         },
-                        child: Text(
-                          "Kirish",
-                          style: AppTextStyle.seoulRobotoRegular.copyWith(
-                            color: AppColors.cF07448,
-                            fontSize: 16.sp,
+                        title: "Ro‘yxatdan o‘tish",
+                      ),
+                      20.getH(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Profilngiz bormi?",
+                            style: AppTextStyle.seoulRobotoRegular.copyWith(
+                              color: AppColors.c010A27,
+                              fontSize: 16.sp,
+                            ),
                           ),
-                        ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return const LoginInScreen();
+                                  },
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Kirish",
+                              style: AppTextStyle.seoulRobotoRegular.copyWith(
+                                color: AppColors.cF07448,
+                                fontSize: 16.sp,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: 30.he,
-              left: 20.we,
-              right: 20.we,
-            ),
-            child: Text(
-              textAlign: TextAlign.center,
-              "Ro'yxatdan o'tayotib, shaxsiy ma'lumotlarni qayta ishlash va ilovadan foydalanish shartlarini qabul qilasiz.",
-              style: AppTextStyle.seoulRobotoRegular.copyWith(
-                  color: AppColors.c010A27.withOpacity(0.40), fontSize: 14.sp),
-            ),
-          ),
-        ],
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: 30.he,
+                  left: 20.we,
+                  right: 20.we,
+                ),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  "Ro'yxatdan o'tayotib, shaxsiy ma'lumotlarni qayta ishlash va ilovadan foydalanish shartlarini qabul qilasiz.",
+                  style: AppTextStyle.seoulRobotoRegular.copyWith(
+                      color: AppColors.c010A27.withOpacity(0.40),
+                      fontSize: 14.sp),
+                ),
+              ),
+            ],
+          );
+        },
+        listener: (BuildContext context, AuthState state) {},
       ),
     );
   }

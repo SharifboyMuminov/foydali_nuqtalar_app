@@ -1,0 +1,28 @@
+import 'package:foydali_nuqtalar/data/api/api_provider.dart';
+import 'package:foydali_nuqtalar/data/models/network_response.dart';
+
+class AuthRepository {
+  AuthRepository(this._apiProvider);
+
+  final ApiProvider _apiProvider;
+
+  Future<NetworkResponse> register({
+    required String email,
+    required String password,
+    required String fullName,
+  }) =>
+      _apiProvider.register(
+        email: email,
+        password: password,
+        fullName: fullName,
+      );
+
+  Future<NetworkResponse> verify({
+    required String email,
+    required String activateCode,
+  }) =>
+      _apiProvider.verify(
+        email: email,
+        activateCode: activateCode,
+      );
+}
