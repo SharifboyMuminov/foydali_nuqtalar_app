@@ -5,6 +5,8 @@ import 'package:foydali_nuqtalar/data/models/network_response.dart';
 import 'package:foydali_nuqtalar/data/models/user/user_model.dart';
 
 class ApiProvider extends ApiClient {
+  //TODO Auth ------------------------------------------------------------
+
   Future<NetworkResponse> register({
     required String email,
     required String password,
@@ -86,4 +88,61 @@ class ApiProvider extends ApiClient {
 
     return networkResponse;
   }
+
+  Future<NetworkResponse> resetPassword({
+    required String email,
+  }) async {
+    NetworkResponse networkResponse = NetworkResponse();
+    try {
+      Response response = await dio.post(
+        'https://nuqtalar.idrok.group/api/users/reset-password/',
+        data: {"email": email},
+      );
+
+      if (response.statusCode != 200) {
+        networkResponse.errorText =
+            response.data["detail"] as String? ?? "Error :(";
+      }
+    } on SocketException {
+      networkResponse.errorText = "No Internet connection";
+    } catch (error) {
+      networkResponse.errorText = error.toString();
+    }
+
+    return networkResponse;
+  }
+
+  Future<NetworkResponse> resetPasswordConfirm({
+    required String email,
+    required String activateCode,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    NetworkResponse networkResponse = NetworkResponse();
+    try {
+      Response response = await dio.post(
+        'https://nuqtalar.idrok.group/api/users/reset-password-confirm/',
+        data: {
+          "email": email,
+          "activation_code": activateCode,
+          "new_password": newPassword,
+          "confirm_password": confirmPassword,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        networkResponse.data = response.data["detail"] as String? ?? "Good :)";
+      } else {
+        networkResponse.data = response.data["detail"] as String? ?? "Error :(";
+      }
+    } on SocketException {
+      networkResponse.errorText = "No Internet connection";
+    } catch (error) {
+      networkResponse.errorText = error.toString();
+    }
+
+    return networkResponse;
+  }
+
+//TODO End Auth ------------------------------------------------------------
 }
