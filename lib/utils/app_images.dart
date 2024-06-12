@@ -10,6 +10,8 @@ class AppImages {
   static String googleLogoSvg = "assets/icons/google_logo.svg";
   static String appleLogoSvg = "assets/icons/apple_logo.svg";
   static String arrowBackSvg = "assets/icons/arrow_back.svg";
+  static String openEyeSvg = "assets/icons/open_eye.svg";
+  static String closeEyeSvg = "assets/icons/close_eye.svg";
 
 //Image
 }

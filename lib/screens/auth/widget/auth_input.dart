@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
+import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
@@ -11,14 +13,14 @@ class AuthMyInput extends StatelessWidget {
     required this.hintText,
     this.textInputType,
     this.textInputAction,
-    this.iconData,
     this.obscureText,
     this.onTabEye,
+    this.isPasswordInput,
   });
 
   final TextEditingController textEditingController;
   final String hintText;
-  final IconData? iconData;
+  final bool? isPasswordInput;
   final bool? obscureText;
   final VoidCallback? onTabEye;
   final TextInputType? textInputType;
@@ -50,17 +52,20 @@ class AuthMyInput extends StatelessWidget {
             width: 1.we,
           ),
         ),
-        hintText: hintText,
-        helperStyle: AppTextStyle.seoulRobotoRegular.copyWith(
+        labelText: hintText,
+        labelStyle: AppTextStyle.seoulRobotoRegular.copyWith(
           color: AppColors.c010A27.withOpacity(0.60),
           fontSize: 16.sp,
         ),
-        suffixIcon: iconData != null
+        suffixIcon: isPasswordInput != null
             ? IconButton(
                 onPressed: onTabEye,
-                icon: Icon(
-                  iconData,
-                  size: 24.we,
+                icon: SvgPicture.asset(
+                  isPasswordInput!
+                      ? AppImages.openEyeSvg
+                      : AppImages.closeEyeSvg,
+                  width: 24.we,
+                  height: 24.we,
                 ),
               )
             : null,

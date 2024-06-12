@@ -73,9 +73,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                     textInputAction: TextInputAction.done,
                     textEditingController: controllerPassword,
                     hintText: 'Parol',
-                    iconData: obscureText
-                        ? Icons.remove_red_eye_outlined
-                        : Icons.remove_red_eye,
+                    isPasswordInput: obscureText,
                     obscureText: obscureText,
                     onTabEye: () {
                       setState(() {

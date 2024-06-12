@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:foydali_nuqtalar/screens/auth/update_password/update_paswwrod_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
@@ -9,15 +8,16 @@ import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class UpdatePasswordScreen extends StatefulWidget {
+  const UpdatePasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final TextEditingController controllerEmail = TextEditingController();
+class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
+  final TextEditingController controllerPasswordOne = TextEditingController();
+  final TextEditingController controllerPasswordTwo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Parolni tiklash",
+          "Yangi parol",
           style: AppTextStyle.seoulRobotoRegular.copyWith(
             color: AppColors.c010A27,
             fontSize: 20.sp,
@@ -60,24 +60,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   20.getH(),
                   AuthMyInput(
-                    textEditingController: controllerEmail,
-                    hintText: "Elektron pochta",
+                    textEditingController: controllerPasswordOne,
+                    hintText: "Yangi parol",
+                  ),
+                  12.getH(),
+                  AuthMyInput(
+                    textEditingController: controllerPasswordTwo,
+                    hintText: "Yangi parolni qaytadan kiriting",
                   ),
                 ],
               ),
             ),
           ),
           GlobalMyButton(
-            onTab: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const UpdatePasswordScreen();
-                  },
-                ),
-              );
-            },
+            onTab: () {},
             title: "Davom etish",
           ),
         ],
@@ -87,7 +83,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   void dispose() {
-    controllerEmail.dispose();
+    controllerPasswordOne.dispose();
+    controllerPasswordTwo.dispose();
     super.dispose();
   }
 }
