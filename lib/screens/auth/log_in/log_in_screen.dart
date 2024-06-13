@@ -114,7 +114,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                                     context.read<AuthBloc>().add(
                                           AuthLoginEvent(
                                             email: controllerEmail.text,
-                                            password: controllerEmail.text,
+                                            password: controllerPassword.text,
                                           ),
                                         );
                                   }

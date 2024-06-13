@@ -4,10 +4,12 @@ import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 class AuthState extends Equatable {
   final String errorText;
   final String statusMessage;
+  final String message;
   final FromStatus fromStatus;
 
   const AuthState({
     required this.fromStatus,
+    required this.message,
     required this.errorText,
     required this.statusMessage,
   });
@@ -15,12 +17,14 @@ class AuthState extends Equatable {
   AuthState copyWith({
     String? errorText,
     String? statusMessage,
+    String? message,
     FromStatus? fromStatus,
   }) {
     return AuthState(
       fromStatus: fromStatus ?? this.fromStatus,
       errorText: errorText ?? this.errorText,
       statusMessage: statusMessage ?? this.statusMessage,
+      message: message ?? this.message,
     );
   }
 
@@ -29,5 +33,6 @@ class AuthState extends Equatable {
         fromStatus,
         errorText,
         statusMessage,
+        message,
       ];
 }

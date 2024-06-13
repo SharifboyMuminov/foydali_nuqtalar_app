@@ -12,11 +12,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             fromStatus: FromStatus.pure,
             errorText: "",
             statusMessage: "",
+            message: '',
           ),
         ) {
     on<AuthRegisterEvent>(_register);
     on<AuthVerifyEvent>(_verify);
     on<AuthLoginEvent>(_login);
+    on<AuthResetPasswordEvent>(_resetPassword);
+    on<AuthResetPasswordConfirmEvent>(_resetPasswordConfirm);
   }
 
   final AuthRepository _authRepository;
@@ -100,6 +103,73 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(
           fromStatus: FromStatus.authenticated,
           statusMessage: "",
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          fromStatus: FromStatus.error,
+          errorText: networkResponse.errorText,
+          statusMessage: "",
+        ),
+      );
+    }
+  }
+
+  Future<void> _resetPassword(AuthResetPasswordEvent event, emit) async {
+    emit(
+      state.copyWith(
+        fromStatus: FromStatus.loading,
+        statusMessage: "",
+      ),
+    );
+
+    NetworkResponse networkResponse = await _authRepository.resetPassword(
+      email: event.email,
+    );
+
+    if (networkResponse.errorText.isEmpty) {
+      emit(
+        state.copyWith(
+          fromStatus: FromStatus.success,
+          statusMessage: "_resetPassword",
+          message: networkResponse.data,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          fromStatus: FromStatus.error,
+          errorText: networkResponse.errorText,
+          statusMessage: "",
+        ),
+      );
+    }
+  }
+
+  Future<void> _resetPasswordConfirm(
+      AuthResetPasswordConfirmEvent event, emit) async {
+    emit(
+      state.copyWith(
+        fromStatus: FromStatus.loading,
+        statusMessage: "",
+      ),
+    );
+
+    NetworkResponse networkResponse =
+        await _authRepository.resetPasswordConfirm(
+      email: event.email,
+      activateCode: event.activationCode,
+      newPassword: event.newPassword,
+      confirmPassword: event.confirmPassword,
+    );
+
+    if (networkResponse.errorText.isEmpty) {
+      emit(
+        state.copyWith(
+          fromStatus: FromStatus.success,
+          statusMessage: "_resetPasswordConfirm",
+          message: networkResponse.data,
         ),
       );
     } else {

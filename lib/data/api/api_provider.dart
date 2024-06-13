@@ -43,10 +43,7 @@ class ApiProvider extends ApiClient {
     try {
       Response response = await dio.post(
         'https://nuqtalar.idrok.group/api/users/activate/',
-        data: jsonEncode({
-          "email": email,
-          "activate_code": activateCode
-        }),
+        data: jsonEncode({"email": email, "activate_code": activateCode}),
       );
 
       if (response.statusCode == 200) {
@@ -58,7 +55,7 @@ class ApiProvider extends ApiClient {
     } on SocketException {
       networkResponse.errorText = "No Internet connection";
     } catch (error) {
-      debugPrint("${error}  ----------------");
+      // debugPrint("${error}  ----------------");
       networkResponse.errorText = "Error activate code or email";
     }
 
@@ -71,6 +68,7 @@ class ApiProvider extends ApiClient {
   }) async {
     NetworkResponse networkResponse = NetworkResponse();
     try {
+      debugPrint("Password: $password");
       Response response = await dio.post(
         'https://nuqtalar.idrok.group/api/users/login/',
         data: jsonEncode({"email": email, "password": password}),

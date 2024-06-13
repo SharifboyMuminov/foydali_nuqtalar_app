@@ -37,6 +37,39 @@ class AuthVerifyEvent extends AuthEvent {
       ];
 }
 
+class AuthResetPasswordEvent extends AuthEvent {
+  final String email;
+
+  AuthResetPasswordEvent({
+    required this.email,
+  });
+
+  @override
+  List<Object?> get props => [email];
+}
+
+class AuthResetPasswordConfirmEvent extends AuthEvent {
+  final String email;
+  final String activationCode;
+  final String newPassword;
+  final String confirmPassword;
+
+  AuthResetPasswordConfirmEvent({
+    required this.email,
+    required this.confirmPassword,
+    required this.newPassword,
+    required this.activationCode,
+  });
+
+  @override
+  List<Object?> get props => [
+        email,
+        confirmPassword,
+        newPassword,
+        activationCode,
+      ];
+}
+
 class AuthLoginEvent extends AuthEvent {
   final String email;
   final String password;
