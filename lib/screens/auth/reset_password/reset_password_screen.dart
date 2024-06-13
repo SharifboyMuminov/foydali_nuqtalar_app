@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:foydali_nuqtalar/screens/auth/update_password/update_paswwrod_screen.dart';
+import 'package:foydali_nuqtalar/screens/auth/reset_password_confirm/reset_password_confirm_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
+import 'package:foydali_nuqtalar/utils/app_reg_exp.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController controllerEmail = TextEditingController();
+
+  String? errorTextForEmail;
+
+  @override
+  void initState() {
+    _listenControllerEmail();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,29 +69,56 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   20.getH(),
                   AuthMyInput(
+                    textInputAction: TextInputAction.done,
                     textEditingController: controllerEmail,
                     hintText: "Elektron pochta",
+                    errorText: errorTextForEmail,
                   ),
                 ],
               ),
             ),
           ),
           GlobalMyButton(
-            onTab: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const UpdatePasswordScreen();
-                  },
-                ),
-              );
-            },
+            backgroundColor: _checkEmail ? null : Colors.grey,
+            onTab: _checkEmail
+                ? () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const ResetPasswordConfirmScreen();
+                        },
+                      ),
+                    );
+                  }
+                : null,
             title: "Davom etish",
           ),
         ],
       ),
     );
+  }
+
+  bool get _checkEmail {
+    return AppRegExp.emailRegExp.hasMatch(controllerEmail.text);
+  }
+
+  _listenControllerEmail() {
+    controllerEmail.addListener(() {
+      if (controllerEmail.text.isEmpty) {
+        setState(() {
+          errorTextForEmail = 'Email is required';
+        });
+      } else if (!_checkEmail) {
+        setState(() {
+          errorTextForEmail = 'Enter a valid email address';
+        });
+      } else {
+        setState(() {
+          errorTextForEmail = null;
+        });
+      }
+    });
   }
 
   @override

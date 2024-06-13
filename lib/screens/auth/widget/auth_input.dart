@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
@@ -17,20 +18,30 @@ class AuthMyInput extends StatelessWidget {
     this.onTabEye,
     this.isPasswordInput,
     this.errorText,
+    this.maxLength,
+    this.digitsOnly = false,
   });
 
   final TextEditingController textEditingController;
   final String hintText;
   final bool? isPasswordInput;
   final bool? obscureText;
+  final bool digitsOnly;
   final VoidCallback? onTabEye;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
   final String? errorText;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxLength,
+      inputFormatters: digitsOnly
+          ? [
+              FilteringTextInputFormatter.digitsOnly,
+            ]
+          : null,
       controller: textEditingController,
       obscureText: obscureText ?? false,
       textInputAction: textInputAction ?? TextInputAction.next,
@@ -90,7 +101,6 @@ class AuthMyInput extends StatelessWidget {
               )
             : null,
       ),
-
     );
   }
 }

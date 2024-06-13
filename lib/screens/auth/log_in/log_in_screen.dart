@@ -5,7 +5,7 @@ import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_event.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_state.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
-import 'package:foydali_nuqtalar/screens/auth/forgot_password/forgot_password_screen.dart';
+import 'package:foydali_nuqtalar/screens/auth/reset_password/reset_password_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_button.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
@@ -136,7 +136,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return const ForgotPasswordScreen();
+                                      return const ResetPasswordScreen();
                                     },
                                   ),
                                 );
