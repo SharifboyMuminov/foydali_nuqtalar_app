@@ -27,7 +27,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController controllerName = TextEditingController();
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerPassword = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   bool obscureText = true;
 
@@ -42,7 +41,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   _listenTextController() {
-    controllerName.addListener(() {});
+    controllerName.addListener(() {
+      setState(() {});
+    });
     controllerEmail.addListener(() {
       if (controllerEmail.text.isEmpty) {
         setState(() {
@@ -91,140 +92,136 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         builder: (BuildContext context, AuthState state) {
-          return Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 20.we, vertical: 16.he),
-                    child: Column(
-                      children: [
-                        AuthMyButton(
-                          onTab: () {},
-                          title: "Google orqali kirish",
-                          iconPathSvg: AppImages.googleLogoSvg,
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.we, vertical: 16.he),
+                  child: Column(
+                    children: [
+                      AuthMyButton(
+                        onTab: () {},
+                        title: "Google orqali kirish",
+                        iconPathSvg: AppImages.googleLogoSvg,
+                      ),
+                      12.getH(),
+                      AuthMyButton(
+                        onTab: () {},
+                        title: "Apple orqali kirish",
+                        iconPathSvg: AppImages.appleLogoSvg,
+                      ),
+                      20.getH(),
+                      Text(
+                        "Yoki",
+                        style: AppTextStyle.seoulRobotoRegular.copyWith(
+                          color: AppColors.c010A27.withOpacity(0.40),
+                          fontSize: 16.sp,
                         ),
-                        12.getH(),
-                        AuthMyButton(
-                          onTab: () {},
-                          title: "Apple orqali kirish",
-                          iconPathSvg: AppImages.appleLogoSvg,
-                        ),
-                        20.getH(),
-                        Text(
-                          "Yoki",
-                          style: AppTextStyle.seoulRobotoRegular.copyWith(
-                            color: AppColors.c010A27.withOpacity(0.40),
-                            fontSize: 16.sp,
+                      ),
+                      20.getH(),
+                      AuthMyInput(
+                        textEditingController: controllerName,
+                        hintText: 'Ismingiz',
+                        errorText: errorTextForName,
+                      ),
+                      12.getH(),
+                      AuthMyInput(
+                        textInputType: TextInputType.emailAddress,
+                        textEditingController: controllerEmail,
+                        hintText: 'Elektron pochta',
+                        errorText: errorTextForEmail,
+                      ),
+                      12.getH(),
+                      AuthMyInput(
+                        textInputAction: TextInputAction.done,
+                        textEditingController: controllerPassword,
+                        hintText: 'Parol',
+                        isPasswordInput: obscureText,
+                        obscureText: obscureText,
+                        onTabEye: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        errorText: errorTextForPassword,
+                      ),
+                      20.getH(),
+                      GlobalMyButton(
+                        backgroundColor:
+                            _validationInput ? null : Colors.grey,
+                        margin: EdgeInsets.zero,
+                        onTab: _validationInput
+                            ? () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) {
+                                //       return const VerificationScreen();
+                                //     },
+                                //   ),
+                                // );
+                              }
+                            : null,
+                        title: "Ro‘yxatdan o‘tish",
+                      ),
+                      20.getH(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Profilngiz bormi?",
+                            style: AppTextStyle.seoulRobotoRegular.copyWith(
+                              color: AppColors.c010A27,
+                              fontSize: 16.sp,
+                            ),
                           ),
-                        ),
-                        20.getH(),
-                        AuthMyInput(
-                          textEditingController: controllerName,
-                          hintText: 'Ismingiz',
-                          errorText: errorTextForName,
-                        ),
-                        12.getH(),
-                        AuthMyInput(
-                          textInputType: TextInputType.emailAddress,
-                          textEditingController: controllerEmail,
-                          hintText: 'Elektron pochta',
-                          errorText: errorTextForEmail,
-                        ),
-                        12.getH(),
-                        AuthMyInput(
-                          textInputAction: TextInputAction.done,
-                          textEditingController: controllerPassword,
-                          hintText: 'Parol',
-                          isPasswordInput: obscureText,
-                          obscureText: obscureText,
-                          onTabEye: () {
-                            setState(() {
-                              obscureText = !obscureText;
-                            });
-                          },
-                          errorText: errorTextForPassword,
-                        ),
-                        20.getH(),
-                        GlobalMyButton(
-                          margin: EdgeInsets.zero,
-                          onTab: () {
-                            if (_formKey.currentState!.validate()) {
-                              // Form is valid, proceed with your logic here
-                              // For this example, we will simply print the email
-                              debugPrint('Email: good');
-                            }
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) {
-                            //       return const VerificationScreen();
-                            //     },
-                            //   ),
-                            // );
-                          },
-                          title: "Ro‘yxatdan o‘tish",
-                        ),
-                        20.getH(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Profilngiz bormi?",
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return const LoginInScreen();
+                                  },
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Kirish",
                               style: AppTextStyle.seoulRobotoRegular.copyWith(
-                                color: AppColors.c010A27,
+                                color: AppColors.cF07448,
                                 fontSize: 16.sp,
                               ),
                             ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const LoginInScreen();
-                                    },
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "Kirish",
-                                style: AppTextStyle.seoulRobotoRegular.copyWith(
-                                  color: AppColors.cF07448,
-                                  fontSize: 16.sp,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    bottom: 30.he,
-                    left: 20.we,
-                    right: 20.we,
-                  ),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    "Ro'yxatdan o'tayotib, shaxsiy ma'lumotlarni qayta ishlash va ilovadan foydalanish shartlarini qabul qilasiz.",
-                    style: AppTextStyle.seoulRobotoRegular.copyWith(
-                        color: AppColors.c010A27.withOpacity(0.40),
-                        fontSize: 14.sp),
-                  ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: 30.he,
+                  left: 20.we,
+                  right: 20.we,
                 ),
-              ],
-            ),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  "Ro'yxatdan o'tayotib, shaxsiy ma'lumotlarni qayta ishlash va ilovadan foydalanish shartlarini qabul qilasiz.",
+                  style: AppTextStyle.seoulRobotoRegular.copyWith(
+                      color: AppColors.c010A27.withOpacity(0.40),
+                      fontSize: 14.sp),
+                ),
+              ),
+            ],
           );
         },
         listener: (BuildContext context, AuthState state) {
@@ -246,6 +243,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
       ),
     );
+  }
+
+  bool get _validationInput {
+    return (AppRegExp.passwordRegExp.hasMatch(controllerPassword.text) &&
+            AppRegExp.emailRegExp.hasMatch(controllerEmail.text)) &&
+        controllerName.text.isNotEmpty;
   }
 
   @override

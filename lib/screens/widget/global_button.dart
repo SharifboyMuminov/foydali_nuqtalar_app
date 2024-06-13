@@ -16,7 +16,7 @@ class GlobalMyButton extends StatelessWidget {
     this.iconPath,
   });
 
-  final VoidCallback onTab;
+  final VoidCallback? onTab;
   final String title;
   final String? iconPath;
   final EdgeInsets? margin;
