@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
@@ -55,12 +57,16 @@ class GlobalMyButton extends StatelessWidget {
                       height: 24.we,
                     ),
                   if (iconPath != null) 4.getW(),
-                  Text(
-                    title,
-                    style: AppTextStyle.seoulRobotoSemiBold.copyWith(
-                      fontSize: 16.sp,
-                      color: titleColor ?? AppColors.white,
-                    ),
+                  Column(
+                    children: [
+                      Text(
+                        title,
+                        style: AppTextStyle.seoulRobotoSemiBold.copyWith(
+                          fontSize: 16.sp,
+                          color: titleColor ?? AppColors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
