@@ -6,13 +6,13 @@ import 'package:foydali_nuqtalar/blocs/auth/auth_state.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/auth/dialog/my_show_dialog.dart';
 import 'package:foydali_nuqtalar/screens/auth/log_in/log_in_screen.dart';
-import 'package:foydali_nuqtalar/screens/auth/verification/verification_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_button.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/home/home_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
+import 'package:foydali_nuqtalar/utils/app_reg_exp.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
@@ -43,8 +43,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   _listenTextController() {
     controllerName.addListener(() {});
-    controllerEmail.addListener(() {});
-    controllerPassword.addListener(() {});
+    controllerEmail.addListener(() {
+      if (controllerEmail.text.isEmpty) {
+        setState(() {
+          errorTextForEmail = 'Email is required';
+        });
+      } else if (!AppRegExp.emailRegExp.hasMatch(controllerEmail.text)) {
+        setState(() {
+          errorTextForEmail = 'Enter a valid email address';
+        });
+      } else {
+        setState(() {
+          errorTextForEmail = null;
+        });
+      }
+    });
+    controllerPassword.addListener(() {
+      if (controllerPassword.text.isEmpty) {
+        setState(() {
+          errorTextForPassword = 'Password is required';
+        });
+      } else if (!AppRegExp.passwordRegExp.hasMatch(controllerPassword.text)) {
+        setState(() {
+          errorTextForPassword = 'Enter a valid password';
+        });
+      } else {
+        setState(() {
+          errorTextForPassword = null;
+        });
+      }
+    });
   }
 
   @override
@@ -123,14 +151,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         GlobalMyButton(
                           margin: EdgeInsets.zero,
                           onTab: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const VerificationScreen();
-                                },
-                              ),
-                            );
+                            if (_formKey.currentState!.validate()) {
+                              // Form is valid, proceed with your logic here
+                              // For this example, we will simply print the email
+                              debugPrint('Email: good');
+                            }
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) {
+                            //       return const VerificationScreen();
+                            //     },
+                            //   ),
+                            // );
                           },
                           title: "Ro‘yxatdan o‘tish",
                         ),

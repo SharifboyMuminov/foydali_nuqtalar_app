@@ -31,6 +31,7 @@ class AuthMyInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: textEditingController,
       obscureText: obscureText ?? false,
       textInputAction: textInputAction ?? TextInputAction.next,
       keyboardType: textInputType ?? TextInputType.text,
@@ -56,20 +57,22 @@ class AuthMyInput extends StatelessWidget {
         ),
         labelText: hintText,
         labelStyle: AppTextStyle.seoulRobotoRegular.copyWith(
-          color: AppColors.c010A27.withOpacity(0.60),
+          color: errorText != null
+              ? Colors.red
+              : AppColors.c010A27.withOpacity(0.60),
           fontSize: 16.sp,
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(
-            color: AppColors.c010A27.withOpacity(0.40),
+            color: Colors.red,
             width: 2.we,
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(
-            color: AppColors.c010A27.withOpacity(0.40),
+            color: Colors.red,
             width: 1.we,
           ),
         ),
