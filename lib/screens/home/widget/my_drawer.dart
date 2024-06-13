@@ -31,7 +31,10 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: width / 1.2,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+      ),
+      width: width - (73.we),
       child: Column(
         children: [
           45.getH(),
