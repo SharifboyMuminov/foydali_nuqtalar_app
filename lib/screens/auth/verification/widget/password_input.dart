@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
@@ -30,6 +31,9 @@ class PasswordMyInput extends StatelessWidget {
 
     return Pinput(
       length: 6,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       defaultPinTheme: defaultPinTheme,
       controller: pinController,
       focusNode: focusNode,

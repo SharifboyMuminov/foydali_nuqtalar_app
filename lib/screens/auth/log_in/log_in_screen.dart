@@ -115,13 +115,14 @@ class _LoginInScreenState extends State<LoginInScreen> {
                       );
                     },
                     child: Text(
-                      "Parolni underutilizing?",
+                      "Parolni unutdingizmi?",
                       style: AppTextStyle.seoulRobotoRegular.copyWith(
                         color: AppColors.cF07448,
                         fontSize: 16.sp,
                       ),
                     ),
                   ),
+
                 ],
               ),
             ),

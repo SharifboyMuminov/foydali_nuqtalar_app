@@ -16,6 +16,7 @@ class AuthMyInput extends StatelessWidget {
     this.obscureText,
     this.onTabEye,
     this.isPasswordInput,
+    this.errorText,
   });
 
   final TextEditingController textEditingController;
@@ -25,6 +26,7 @@ class AuthMyInput extends StatelessWidget {
   final VoidCallback? onTabEye;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,21 @@ class AuthMyInput extends StatelessWidget {
           color: AppColors.c010A27.withOpacity(0.60),
           fontSize: 16.sp,
         ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4.r),
+          borderSide: BorderSide(
+            color: AppColors.c010A27.withOpacity(0.40),
+            width: 2.we,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4.r),
+          borderSide: BorderSide(
+            color: AppColors.c010A27.withOpacity(0.40),
+            width: 1.we,
+          ),
+        ),
+        errorText: errorText,
         suffixIcon: isPasswordInput != null
             ? IconButton(
                 onPressed: onTabEye,
