@@ -40,42 +40,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.initState();
   }
 
-  _listenTextController() {
-    controllerName.addListener(() {
-      setState(() {});
-    });
-    controllerEmail.addListener(() {
-      if (controllerEmail.text.isEmpty) {
-        setState(() {
-          errorTextForEmail = 'Email is required';
-        });
-      } else if (!AppRegExp.emailRegExp.hasMatch(controllerEmail.text)) {
-        setState(() {
-          errorTextForEmail = 'Enter a valid email address';
-        });
-      } else {
-        setState(() {
-          errorTextForEmail = null;
-        });
-      }
-    });
-    controllerPassword.addListener(() {
-      if (controllerPassword.text.isEmpty) {
-        setState(() {
-          errorTextForPassword = 'Password is required';
-        });
-      } else if (!AppRegExp.passwordRegExp.hasMatch(controllerPassword.text)) {
-        setState(() {
-          errorTextForPassword = 'Enter a valid password';
-        });
-      } else {
-        setState(() {
-          errorTextForPassword = null;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,8 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       20.getH(),
                       GlobalMyButton(
-                        backgroundColor:
-                            _validationInput ? null : Colors.grey,
+                        backgroundColor: _validationInput ? null : Colors.grey,
                         margin: EdgeInsets.zero,
                         onTab: _validationInput
                             ? () {
@@ -249,6 +212,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return (AppRegExp.passwordRegExp.hasMatch(controllerPassword.text) &&
             AppRegExp.emailRegExp.hasMatch(controllerEmail.text)) &&
         controllerName.text.isNotEmpty;
+  }
+
+  _listenTextController() {
+    controllerName.addListener(() {
+      setState(() {});
+    });
+    controllerEmail.addListener(() {
+      if (controllerEmail.text.isEmpty) {
+        setState(() {
+          errorTextForEmail = 'Email is required';
+        });
+      } else if (!AppRegExp.emailRegExp.hasMatch(controllerEmail.text)) {
+        setState(() {
+          errorTextForEmail = 'Enter a valid email address';
+        });
+      } else {
+        setState(() {
+          errorTextForEmail = null;
+        });
+      }
+    });
+    controllerPassword.addListener(() {
+      if (controllerPassword.text.isEmpty) {
+        setState(() {
+          errorTextForPassword = 'Password is required';
+        });
+      } else if (!AppRegExp.passwordRegExp.hasMatch(controllerPassword.text)) {
+        setState(() {
+          errorTextForPassword = 'Enter a valid password';
+        });
+      } else {
+        setState(() {
+          errorTextForPassword = null;
+        });
+      }
+    });
   }
 
   @override
