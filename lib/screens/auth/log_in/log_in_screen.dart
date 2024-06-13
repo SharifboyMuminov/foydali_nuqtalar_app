@@ -7,6 +7,7 @@ import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
+import 'package:foydali_nuqtalar/utils/app_reg_exp.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
@@ -21,6 +22,47 @@ class _LoginInScreenState extends State<LoginInScreen> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   bool obscureText = true;
+  String? errorTextForEmail;
+  String? errorTextForPassword;
+
+  _listenTextController() {
+    controllerEmail.addListener(() {
+      if (controllerEmail.text.isEmpty) {
+        setState(() {
+          errorTextForEmail = 'Email is required';
+        });
+      } else if (!AppRegExp.emailRegExp.hasMatch(controllerEmail.text)) {
+        setState(() {
+          errorTextForEmail = 'Enter a valid email address';
+        });
+      } else {
+        setState(() {
+          errorTextForEmail = null;
+        });
+      }
+    });
+    controllerPassword.addListener(() {
+      if (controllerPassword.text.isEmpty) {
+        setState(() {
+          errorTextForPassword = 'Password is required';
+        });
+      } else if (!AppRegExp.passwordRegExp.hasMatch(controllerPassword.text)) {
+        setState(() {
+          errorTextForPassword = 'Enter a valid password';
+        });
+      } else {
+        setState(() {
+          errorTextForPassword = null;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    _listenTextController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +106,14 @@ class _LoginInScreenState extends State<LoginInScreen> {
                   ),
                   20.getH(),
                   AuthMyInput(
+                    errorText: errorTextForEmail,
                     textInputType: TextInputType.emailAddress,
                     textEditingController: controllerEmail,
                     hintText: 'Elektron pochta',
                   ),
                   12.getH(),
                   AuthMyInput(
+                    errorText: errorTextForPassword,
                     textInputAction: TextInputAction.done,
                     textEditingController: controllerPassword,
                     hintText: 'Parol',
@@ -83,17 +127,20 @@ class _LoginInScreenState extends State<LoginInScreen> {
                   ),
                   20.getH(),
                   GlobalMyButton(
+                    backgroundColor: _validationInput ? null : Colors.grey,
                     margin: EdgeInsets.zero,
-                    onTab: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const VerificationScreen();
-                          },
-                        ),
-                      );
-                    },
+                    onTab: _validationInput
+                        ? () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const VerificationScreen();
+                                },
+                              ),
+                            );
+                          }
+                        : null,
                     title: "Ro‘yxatdan o‘tish",
                   ),
                   20.getH(),
@@ -166,6 +213,11 @@ class _LoginInScreenState extends State<LoginInScreen> {
         ],
       ),
     );
+  }
+
+  bool get _validationInput {
+    return (AppRegExp.passwordRegExp.hasMatch(controllerPassword.text) &&
+        AppRegExp.emailRegExp.hasMatch(controllerEmail.text));
   }
 
   @override
