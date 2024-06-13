@@ -1,4 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
+import 'package:foydali_nuqtalar/utils/app_colors.dart';
+import 'package:foydali_nuqtalar/utils/app_images.dart';
+import 'package:foydali_nuqtalar/utils/app_size.dart';
+import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,69 +17,64 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  String? _emailErrorText;
-
-  void _validateEmail(String value) {
-    if (value.isEmpty) {
-      setState(() {
-        _emailErrorText = 'Email is required';
-      });
-    } else if (!isEmailValid(value)) {
-      setState(() {
-        _emailErrorText = 'Enter a valid email address';
-      });
-    } else {
-      setState(() {
-        _emailErrorText = null;
-      });
-    }
-  }
-
-  bool isEmailValid(String email) {
-    // Basic email validation using regex
-    // You can implement more complex validation if needed
-    return RegExp(r'^[\w-\.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$').hasMatch(email);
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Form is valid, proceed with your logic here
-      // For this example, we will simply print the email
-      print('Email: ${_emailController.text}');
-    }
-  }
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('TextField Validation'),
+      drawerEnableOpenDragGesture: false,
+      key: _key,
+      drawer: Drawer(
+        width: width / 1.2,
+        child: Column(
+          children: [
+            45.getH(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.we),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "FOYDALI",
+                    style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
+                      fontSize: 14.sp,
+                      color: AppColors.c010A27,
+                    ),
+                  ),
+                  SvgPicture.asset(
+                    AppImages.splashIconSvg,
+                    width: 48.we,
+                    height: 48.we,
+                  ),
+                  Text(
+                    "NUQTALAR",
+                    style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
+                      fontSize: 16.sp,
+                      color: AppColors.c010A27,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            GlobalMyButton(
+              margin: EdgeInsets.symmetric(horizontal: 20.we, vertical: 16.he),
+              iconPath: AppImages.profileSvg,
+              onTab: () {},
+              title: "Profilga kirish",
+              titleColor: AppColors.white,
+            ),
+          ],
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  errorText: _emailErrorText,
-                ),
-                validator: (value) => _emailErrorText,
-                onChanged: _validateEmail,
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: Text('Submit'),
-              ),
-            ],
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            _key.currentState!.openDrawer();
+          },
+          icon: SvgPicture.asset(
+            AppImages.drawerSvg,
+            width: 24.we,
+            height: 24.we,
           ),
         ),
       ),

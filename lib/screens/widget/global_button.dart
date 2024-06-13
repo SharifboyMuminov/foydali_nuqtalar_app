@@ -52,6 +52,7 @@ class GlobalMyButton extends StatelessWidget {
                       width: 24.we,
                       height: 24.we,
                     ),
+                  if (iconPath != null) 4.getW(),
                   Text(
                     title,
                     style: AppTextStyle.seoulRobotoSemiBold.copyWith(
