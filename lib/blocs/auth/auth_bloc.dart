@@ -22,7 +22,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
 
   Future<void> _register(AuthRegisterEvent event, emit) async {
-    emit(state.copyWith(fromStatus: FromStatus.loading));
+    emit(
+      state.copyWith(
+        fromStatus: FromStatus.loading,
+        statusMessage: "",
+      ),
+    );
 
     NetworkResponse networkResponse = await _authRepository.register(
       email: event.email,
@@ -31,39 +36,59 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     if (networkResponse.errorText.isEmpty) {
-      emit(state.copyWith(fromStatus: FromStatus.success));
+      emit(
+        state.copyWith(
+          fromStatus: FromStatus.success,
+          statusMessage: "good",
+        ),
+      );
     } else {
       emit(
         state.copyWith(
           fromStatus: FromStatus.error,
           errorText: networkResponse.errorText,
+          statusMessage: "",
         ),
       );
     }
   }
 
   Future<void> _verify(AuthVerifyEvent event, emit) async {
-    emit(state.copyWith(fromStatus: FromStatus.loading));
+    emit(
+      state.copyWith(
+        fromStatus: FromStatus.loading,
+        statusMessage: "",
+      ),
+    );
 
     NetworkResponse networkResponse = await _authRepository.verify(
       email: event.email,
-      activateCode: event.activateCode,
+      activateCode: int.parse(event.activateCode),
     );
 
     if (networkResponse.errorText.isEmpty) {
-      emit(state.copyWith(fromStatus: FromStatus.authenticated));
+      emit(
+        state.copyWith(
+          fromStatus: FromStatus.success,
+          statusMessage: "ok",
+        ),
+      );
     } else {
       emit(
         state.copyWith(
           fromStatus: FromStatus.error,
           errorText: networkResponse.errorText,
+          statusMessage: "",
         ),
       );
     }
   }
 
   Future<void> _login(AuthLoginEvent event, emit) async {
-    emit(state.copyWith(fromStatus: FromStatus.loading));
+    emit(state.copyWith(
+      fromStatus: FromStatus.loading,
+      statusMessage: "",
+    ));
 
     NetworkResponse networkResponse = await _authRepository.login(
       email: event.email,
@@ -71,12 +96,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     if (networkResponse.errorText.isEmpty) {
-      emit(state.copyWith(fromStatus: FromStatus.authenticated));
+      emit(
+        state.copyWith(
+          fromStatus: FromStatus.authenticated,
+          statusMessage: "",
+        ),
+      );
     } else {
       emit(
         state.copyWith(
           fromStatus: FromStatus.error,
           errorText: networkResponse.errorText,
+          statusMessage: "",
         ),
       );
     }

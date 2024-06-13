@@ -14,6 +14,7 @@ class GlobalMyButton extends StatelessWidget {
     this.backgroundColor,
     this.titleColor,
     this.iconPath,
+    this.loading = false,
   });
 
   final VoidCallback? onTab;
@@ -22,6 +23,7 @@ class GlobalMyButton extends StatelessWidget {
   final EdgeInsets? margin;
   final Color? backgroundColor;
   final Color? titleColor;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -37,24 +39,28 @@ class GlobalMyButton extends StatelessWidget {
           backgroundColor: backgroundColor ?? AppColors.cF07448,
         ),
         onPressed: onTab,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (iconPath != null)
-              SvgPicture.asset(
-                iconPath!,
-                width: 24.we,
-                height: 24.we,
+        child: loading
+            ? const Center(
+                child: CircularProgressIndicator.adaptive(),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (iconPath != null)
+                    SvgPicture.asset(
+                      iconPath!,
+                      width: 24.we,
+                      height: 24.we,
+                    ),
+                  Text(
+                    title,
+                    style: AppTextStyle.seoulRobotoSemiBold.copyWith(
+                      fontSize: 16.sp,
+                      color: titleColor ?? AppColors.white,
+                    ),
+                  ),
+                ],
               ),
-            Text(
-              title,
-              style: AppTextStyle.seoulRobotoSemiBold.copyWith(
-                fontSize: 16.sp,
-                color: titleColor ?? AppColors.white,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

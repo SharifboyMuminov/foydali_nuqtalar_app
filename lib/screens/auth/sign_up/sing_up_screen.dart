@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_event.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_state.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/auth/dialog/my_show_dialog.dart';
 import 'package:foydali_nuqtalar/screens/auth/log_in/log_in_screen.dart';
+import 'package:foydali_nuqtalar/screens/auth/verification/verification_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_button.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/home/home_screen.dart';
@@ -112,20 +114,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       20.getH(),
                       GlobalMyButton(
+                        loading: state.fromStatus == FromStatus.loading,
                         backgroundColor: _validationInput ? null : Colors.grey,
                         margin: EdgeInsets.zero,
-                        onTab: _validationInput
-                            ? () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) {
-                                //       return const VerificationScreen();
-                                //     },
-                                //   ),
-                                // );
-                              }
-                            : null,
+                        onTab: state.fromStatus == FromStatus.loading
+                            ? null
+                            : _validationInput
+                                ? () {
+                                    context.read<AuthBloc>().add(
+                                          AuthRegisterEvent(
+                                            email: controllerEmail.text,
+                                            fullName: controllerName.text,
+                                            password: controllerPassword.text,
+                                          ),
+                                        );
+                                  }
+                                : null,
                         title: "Ro‘yxatdan o‘tish",
                       ),
                       20.getH(),
@@ -187,23 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           );
         },
-        listener: (BuildContext context, AuthState state) {
-          if (state.fromStatus == FromStatus.authenticated) {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-              builder: (context) {
-                return const HomeScreen();
-              },
-            ), (route) => false);
-          } else if (state.fromStatus == FromStatus.error) {
-            myShowDialog(
-              context,
-              title: state.errorText,
-              onTab: () {
-                Navigator.pop(context);
-              },
-            );
-          }
-        },
+        listener: _listenAuthBloc,
       ),
     );
   }
@@ -212,6 +200,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return (AppRegExp.passwordRegExp.hasMatch(controllerPassword.text) &&
             AppRegExp.emailRegExp.hasMatch(controllerEmail.text)) &&
         controllerName.text.isNotEmpty;
+  }
+
+  _listenAuthBloc(BuildContext context, AuthState state) {
+    if (state.fromStatus == FromStatus.success) {
+      if (state.statusMessage == "good") {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return VerificationScreen(
+                email: controllerEmail.text,
+              );
+            },
+          ),
+        );
+      } else if (state.statusMessage == "ok") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return LoginInScreen(email: controllerEmail.text);
+            },
+          ),
+        );
+      }
+    } else if (state.fromStatus == FromStatus.authenticated) {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+        builder: (context) {
+          return const HomeScreen();
+        },
+      ), (route) => false);
+    } else if (state.fromStatus == FromStatus.error) {
+      myShowDialog(
+        context,
+        title: state.errorText,
+        onTab: () {
+          Navigator.pop(context);
+        },
+      );
+    }
   }
 
   _listenTextController() {

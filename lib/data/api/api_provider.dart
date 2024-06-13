@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:foydali_nuqtalar/data/api/api_client.dart';
 import 'package:foydali_nuqtalar/data/models/network_response.dart';
 import 'package:foydali_nuqtalar/data/models/user/user_model.dart';
@@ -17,11 +19,8 @@ class ApiProvider extends ApiClient {
     try {
       Response response = await dio.post(
         'https://nuqtalar.idrok.group/api/users/register/',
-        data: {
-          "full_name": fullName,
-          "email": email,
-          "password": password,
-        },
+        data: jsonEncode(
+            {"full_name": fullName, "email": email, "password": password}),
       );
 
       if (response.statusCode != 201) {
@@ -30,7 +29,7 @@ class ApiProvider extends ApiClient {
     } on SocketException {
       networkResponse.errorText = "No Internet connection";
     } catch (error) {
-      networkResponse.errorText = error.toString();
+      networkResponse.errorText = "With this Email already exists.";
     }
 
     return networkResponse;
@@ -38,19 +37,20 @@ class ApiProvider extends ApiClient {
 
   Future<NetworkResponse> verify({
     required String email,
-    required String activateCode,
+    required int activateCode,
   }) async {
     NetworkResponse networkResponse = NetworkResponse();
     try {
       Response response = await dio.post(
         'https://nuqtalar.idrok.group/api/users/activate/',
-        data: {
+        data: jsonEncode({
           "email": email,
-          "activate_code": activateCode,
-        },
+          "activate_code": activateCode
+        }),
       );
 
       if (response.statusCode == 200) {
+        debugPrint("${response.data} -------------");
         networkResponse.errorText = response.data["message"];
       } else {
         networkResponse.errorText = "Error password :(";
@@ -58,7 +58,8 @@ class ApiProvider extends ApiClient {
     } on SocketException {
       networkResponse.errorText = "No Internet connection";
     } catch (error) {
-      networkResponse.errorText = error.toString();
+      debugPrint("${error}  ----------------");
+      networkResponse.errorText = "Error activate code or email";
     }
 
     return networkResponse;
@@ -72,7 +73,7 @@ class ApiProvider extends ApiClient {
     try {
       Response response = await dio.post(
         'https://nuqtalar.idrok.group/api/users/login/',
-        data: {"email": email, "password": password},
+        data: jsonEncode({"email": email, "password": password}),
       );
 
       if (response.statusCode == 200) {
@@ -83,7 +84,7 @@ class ApiProvider extends ApiClient {
     } on SocketException {
       networkResponse.errorText = "No Internet connection";
     } catch (error) {
-      networkResponse.errorText = error.toString();
+      networkResponse.errorText = "No user or error emil or password :(";
     }
 
     return networkResponse;
