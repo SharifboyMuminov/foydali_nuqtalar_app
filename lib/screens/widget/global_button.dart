@@ -14,6 +14,7 @@ class GlobalMyButton extends StatelessWidget {
     this.backgroundColor,
     this.titleColor,
     this.iconPath,
+    this.padding,
     this.loading = false,
   });
 
@@ -21,6 +22,7 @@ class GlobalMyButton extends StatelessWidget {
   final String title;
   final String? iconPath;
   final EdgeInsets? margin;
+  final EdgeInsets? padding;
   final Color? backgroundColor;
   final Color? titleColor;
   final bool loading;
@@ -32,7 +34,7 @@ class GlobalMyButton extends StatelessWidget {
           margin ?? EdgeInsets.symmetric(horizontal: 20.we, vertical: 20.he),
       child: TextButton(
         style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 17.he),
+          padding: padding ?? EdgeInsets.symmetric(vertical: 17.he),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4.r),
           ),

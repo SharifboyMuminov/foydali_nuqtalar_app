@@ -14,6 +14,12 @@ class AppImages {
   static String closeEyeSvg = "assets/icons/close_eye.svg";
   static String drawerSvg = "assets/icons/drawer.svg";
   static String profileSvg = "assets/icons/profile.svg";
+  static String profileTwoSvg = "assets/icons/profile_two.svg";
+  static String themDarkSvg = "assets/icons/them_dark.svg";
+  static String infoSvg = "assets/icons/info.svg";
+  static String videoSvg = "assets/icons/video.svg";
+  static String logoutSvg = "assets/icons/logout.svg";
+
 
 //Image
 }
