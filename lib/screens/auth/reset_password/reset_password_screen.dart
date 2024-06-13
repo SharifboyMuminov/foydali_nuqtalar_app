@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:foydali_nuqtalar/screens/auth/reset_password_confirm/reset_password_confirm_screen.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_event.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_state.dart';
+import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
@@ -51,50 +55,54 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.we),
-              child: Column(
-                children: [
-                  4.getH(),
-                  Text(
-                    "Elektron pochtangizni kiriting va biz unga parolni tiklash uchun kod yuboramiz",
-                    textAlign: TextAlign.center,
-                    style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      color: AppColors.c010A27.withOpacity(0.40),
-                      fontSize: 16.sp,
-                    ),
-                  ),
-                  20.getH(),
-                  AuthMyInput(
-                    textInputAction: TextInputAction.done,
-                    textEditingController: controllerEmail,
-                    hintText: "Elektron pochta",
-                    errorText: errorTextForEmail,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          GlobalMyButton(
-            backgroundColor: _checkEmail ? null : Colors.grey,
-            onTab: _checkEmail
-                ? () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const ResetPasswordConfirmScreen();
-                        },
+      body: BlocBuilder<AuthBloc, AuthState>(
+        builder: (BuildContext context, AuthState state) {
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: 20.we),
+                  child: Column(
+                    children: [
+                      4.getH(),
+                      Text(
+                        "Elektron pochtangizni kiriting va biz unga parolni tiklash uchun kod yuboramiz",
+                        textAlign: TextAlign.center,
+                        style: AppTextStyle.seoulRobotoRegular.copyWith(
+                          color: AppColors.c010A27.withOpacity(0.40),
+                          fontSize: 16.sp,
+                        ),
                       ),
-                    );
-                  }
-                : null,
-            title: "Davom etish",
-          ),
-        ],
+                      20.getH(),
+                      AuthMyInput(
+                        textInputAction: TextInputAction.done,
+                        textEditingController: controllerEmail,
+                        hintText: "Elektron pochta",
+                        errorText: errorTextForEmail,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              GlobalMyButton(
+                loading: state.fromStatus == FromStatus.loading,
+                backgroundColor: _checkEmail ? null : Colors.grey,
+                onTab: state.fromStatus == FromStatus.loading
+                    ? null
+                    : _checkEmail
+                        ? () {
+                            context.read<AuthBloc>().add(
+                                  AuthResetPasswordEvent(
+                                    email: controllerEmail.text,
+                                  ),
+                                );
+                          }
+                        : null,
+                title: "Davom etish",
+              ),
+            ],
+          );
+        },
       ),
     );
   }

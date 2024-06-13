@@ -101,6 +101,8 @@ class ApiProvider extends ApiClient {
       if (response.statusCode != 200) {
         networkResponse.errorText =
             response.data["detail"] as String? ?? "Error :(";
+      } else {
+        networkResponse.data = response.data["detail"] as String? ?? "Error :(";
       }
     } on SocketException {
       networkResponse.errorText = "No Internet connection";

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_event.dart';
+import 'package:foydali_nuqtalar/blocs/auth/auth_state.dart';
+import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
@@ -10,7 +15,9 @@ import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
 class ResetPasswordConfirmScreen extends StatefulWidget {
-  const ResetPasswordConfirmScreen({super.key});
+  const ResetPasswordConfirmScreen({super.key, required this.email});
+
+  final String email;
 
   @override
   State<ResetPasswordConfirmScreen> createState() =>
@@ -35,76 +42,107 @@ class _ResetPasswordConfirmScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Yangi parol",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            color: AppColors.c010A27,
-            fontSize: 20.sp,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: SvgPicture.asset(
-            AppImages.arrowBackSvg,
-            width: 24.we,
-            height: 24.we,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.we),
-              child: Column(
-                children: [
-                  4.getH(),
-                  Text(
-                    "Elektron pochtangizni kiriting va biz unga parolni tiklash uchun kod yuboramiz",
-                    textAlign: TextAlign.center,
-                    style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      color: AppColors.c010A27.withOpacity(0.40),
-                      fontSize: 16.sp,
-                    ),
-                  ),
-                  20.getH(),
-                  AuthMyInput(
-                    errorText: errorTextNewPassword,
-                    textEditingController: controllerNewPassword,
-                    hintText: "Yangi parol",
-                  ),
-                  12.getH(),
-                  AuthMyInput(
-                    errorText: errorTextConfirmPassword,
-                    textEditingController: controllerConfirmPassword,
-                    hintText: "Yangi parolni qaytadan kiriting",
-                  ),
-                  12.getH(),
-                  AuthMyInput(
-                    errorText: errorTextActiveCode,
-                    maxLength: 6,
-                    textInputType: TextInputType.number,
-                    digitsOnly: true,
-                    textInputAction: TextInputAction.done,
-                    textEditingController: controllerActiveCode,
-                    hintText: "The code you received",
-                  ),
-                ],
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (BuildContext context, AuthState state) {
+        return PopScope(
+          canPop: state.fromStatus != FromStatus.loading,
+          child: Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                "Yangi parol",
+                style: AppTextStyle.seoulRobotoRegular.copyWith(
+                  color: AppColors.c010A27,
+                  fontSize: 20.sp,
+                ),
+              ),
+              leading: IconButton(
+                onPressed: () {
+                  if (state.fromStatus != FromStatus.loading) {
+                    Navigator.pop(context);
+                  }
+                },
+                icon: SvgPicture.asset(
+                  AppImages.arrowBackSvg,
+                  width: 24.we,
+                  height: 24.we,
+                ),
               ),
             ),
+            body: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(horizontal: 20.we),
+                    child: Column(
+                      children: [
+                        4.getH(),
+                        Text(
+                          "Elektron pochtangizni kelgan kodni va yangi parolni kiriting",
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle.seoulRobotoRegular.copyWith(
+                            color: AppColors.c010A27.withOpacity(0.40),
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                        20.getH(),
+                        AuthMyInput(
+                          errorText: errorTextNewPassword,
+                          textEditingController: controllerNewPassword,
+                          hintText: "Yangi parol",
+                        ),
+                        12.getH(),
+                        AuthMyInput(
+                          errorText: errorTextConfirmPassword,
+                          textEditingController: controllerConfirmPassword,
+                          hintText: "Yangi parolni qaytadan kiriting",
+                        ),
+                        12.getH(),
+                        AuthMyInput(
+                          errorText: errorTextActiveCode,
+                          maxLength: 6,
+                          textInputType: TextInputType.number,
+                          digitsOnly: true,
+                          textInputAction: TextInputAction.done,
+                          textEditingController: controllerActiveCode,
+                          hintText: "The code you received",
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GlobalMyButton(
+                  loading: state.fromStatus == FromStatus.loading,
+                  backgroundColor: _checkInput ? null : Colors.grey,
+                  onTab: state.fromStatus == FromStatus.loading
+                      ? null
+                      : _checkInput
+                          ? () {
+                              context.read<AuthBloc>().add(
+                                    AuthResetPasswordConfirmEvent(
+                                      email: widget.email,
+                                      confirmPassword:
+                                          controllerConfirmPassword.text,
+                                      newPassword: controllerNewPassword.text,
+                                      activationCode: controllerActiveCode.text,
+                                    ),
+                                  );
+                            }
+                          : null,
+                  title: "Davom etish",
+                ),
+              ],
+            ),
           ),
-          GlobalMyButton(
-            onTab: () {},
-            title: "Davom etish",
-          ),
-        ],
-      ),
+        );
+      },
     );
+  }
+
+  bool get _checkInput {
+    return AppRegExp.passwordRegExp.hasMatch(controllerNewPassword.text) &&
+        AppRegExp.passwordRegExp.hasMatch(controllerConfirmPassword.text) &&
+        controllerActiveCode.text.length == 6;
   }
 
   _listenControllers() {
@@ -154,7 +192,6 @@ class _ResetPasswordConfirmScreenState
           errorTextActiveCode = 'maxLength > 5 :)';
         });
       } else {
-        debugPrint("------- ${controllerActiveCode.text.length}");
         setState(() {
           errorTextActiveCode = null;
         });

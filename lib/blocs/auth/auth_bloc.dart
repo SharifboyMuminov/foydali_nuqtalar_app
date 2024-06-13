@@ -13,6 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             errorText: "",
             statusMessage: "",
             message: '',
+            userEmail: '',
           ),
         ) {
     on<AuthRegisterEvent>(_register);
@@ -131,6 +132,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (networkResponse.errorText.isEmpty) {
       emit(
         state.copyWith(
+          userEmail: event.email,
           fromStatus: FromStatus.success,
           statusMessage: "_resetPassword",
           message: networkResponse.data,

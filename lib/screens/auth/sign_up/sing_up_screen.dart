@@ -7,6 +7,7 @@ import 'package:foydali_nuqtalar/blocs/auth/auth_state.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/auth/dialog/my_show_dialog.dart';
 import 'package:foydali_nuqtalar/screens/auth/log_in/log_in_screen.dart';
+import 'package:foydali_nuqtalar/screens/auth/reset_password_confirm/reset_password_confirm_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/verification/verification_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_button.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
@@ -224,6 +225,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
             },
           ),
         );
+      } else if (state.statusMessage == "_resetPassword") {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return ResetPasswordConfirmScreen(
+                email: state.userEmail,
+              );
+            },
+          ),
+        );
+        myShowDialog(
+          context,
+          onTab: () {
+            Navigator.pop(context);
+          },
+          title: state.message,
+        );
+      } else if (state.statusMessage == "_resetPasswordConfirm") {
+        Navigator.pop(context);
+        Navigator.pop(context);
       }
     } else if (state.fromStatus == FromStatus.authenticated) {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
