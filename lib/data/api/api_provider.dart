@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:foydali_nuqtalar/data/api/api_client.dart';
 import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/data/models/app_info/app_info_model.dart';
+import 'package:foydali_nuqtalar/data/models/book/book_model.dart';
 import 'package:foydali_nuqtalar/data/models/network_response.dart';
 import 'package:foydali_nuqtalar/data/models/user/user_model.dart';
 
@@ -188,4 +189,30 @@ class ApiProvider extends ApiClient {
   }
 
 //TODO End App info ------------------------------------------------------------
+
+//TODO Start Book  ------------------------------------------------------------
+  Future<NetworkResponse> fetchBooks() async {
+    NetworkResponse networkResponse = NetworkResponse();
+    try {
+      Response response = await dio.get(
+        'https://nuqtalar.idrok.group/api/book/?limit=5',
+      );
+
+      if (response.statusCode == 200) {
+        networkResponse.data = (response.data["results"] as List?)
+                ?.map((e) => BookModel.fromJson(e["translate"]["uz"]))
+                .toList() ??
+            [];
+      } else {
+        networkResponse.errorText = "Error :(";
+      }
+    } on SocketException {
+      networkResponse.errorText = "No Internet connection";
+    } catch (error) {
+      networkResponse.errorText = error.toString();
+    }
+
+    return networkResponse;
+  }
+//TODO End Book  ------------------------------------------------------------
 }

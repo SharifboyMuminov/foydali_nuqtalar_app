@@ -4,10 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_bloc.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_event.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/book/book_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/book/book_event.dart';
 import 'package:foydali_nuqtalar/blocs/font_style/font_style_bloc.dart';
 import 'package:foydali_nuqtalar/data/api/api_provider.dart';
 import 'package:foydali_nuqtalar/data/repositories/app_info_repository.dart';
 import 'package:foydali_nuqtalar/data/repositories/auth_repository.dart';
+import 'package:foydali_nuqtalar/data/repositories/book_repository.dart';
 import 'package:foydali_nuqtalar/screens/splash/splash_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 
@@ -24,6 +27,7 @@ class App extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (_) => AuthRepository(_apiProvider)),
         RepositoryProvider(create: (_) => AppInfoRepository(_apiProvider)),
+        RepositoryProvider(create: (_) => BookRepository(_apiProvider)),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -36,6 +40,11 @@ class App extends StatelessWidget {
             create: (context) => AppInfoBloc(
               context.read<AppInfoRepository>(),
             )..add(AppInfoGetEvent()),
+          ),
+          BlocProvider(
+            create: (context) => BookBloc(
+              context.read<BookRepository>(),
+            )..add(BookFetchEvent()),
           ),
           BlocProvider(create: (_) => FontStyleBloc()),
         ],
