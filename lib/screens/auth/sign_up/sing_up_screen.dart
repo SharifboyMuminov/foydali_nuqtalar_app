@@ -216,15 +216,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             },
           ),
         );
-      } else if (state.statusMessage == "ok") {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return LoginInScreen(email: controllerEmail.text);
-            },
-          ),
-        );
       } else if (state.statusMessage == "_resetPassword") {
         Navigator.push(
           context,
