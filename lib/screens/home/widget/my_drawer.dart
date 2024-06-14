@@ -108,7 +108,7 @@ class MyDrawer extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "Xurshid Komilov",
+                            fullName,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyle.seoulRobotoRegular.copyWith(
@@ -117,7 +117,7 @@ class MyDrawer extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "komilov123@gmail.com",
+                            email,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyle.seoulRobotoRegular.copyWith(
