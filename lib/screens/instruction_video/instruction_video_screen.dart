@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/screens/auth/sign_up/sing_up_screen.dart';
+import 'package:foydali_nuqtalar/screens/home/home_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
@@ -63,6 +65,7 @@ class _InstructionVideoScreenState extends State<InstructionVideoScreen> {
                       vertical: 4.he,
                     ),
                     onTab: () {
+                      StorageRepository.setBool(key: "old_user", value: true);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -77,7 +80,15 @@ class _InstructionVideoScreenState extends State<InstructionVideoScreen> {
                     backgroundColor: AppColors.white,
                   ),
                   GlobalMyButton(
-                    onTab: () {},
+                    onTab: () {
+                      StorageRepository.setBool(key: "old_user", value: true);
+
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const HomeScreen();
+                        },
+                      ), (route) => false);
+                    },
                     title: "Kitobni o’qish",
                     margin: EdgeInsets.symmetric(
                       horizontal: 20.we,

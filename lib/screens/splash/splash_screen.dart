@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
+import 'package:foydali_nuqtalar/screens/choose_language/choose_language_screen.dart';
 import 'package:foydali_nuqtalar/screens/home/home_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
@@ -16,14 +18,34 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    String userFullName = StorageRepository.getString(key: "user_full_name");
+
     Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(milliseconds: 2300),
       () {
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-          builder: (context) {
-            return const HomeScreen();
-          },
-        ), (route) => false);
+        if (userFullName.isEmpty) {
+          bool oldUser = StorageRepository.getBool(key: "old_user");
+
+          if (oldUser) {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+              builder: (context) {
+                return const HomeScreen();
+              },
+            ), (route) => false);
+          } else {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+              builder: (context) {
+                return const ChooseLanguageScreen();
+              },
+            ), (route) => false);
+          }
+        } else {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+            builder: (context) {
+              return const HomeScreen();
+            },
+          ), (route) => false);
+        }
       },
     );
     super.initState();

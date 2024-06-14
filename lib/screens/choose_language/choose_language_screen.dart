@@ -21,11 +21,13 @@ class ChooseLanguageScreen extends StatefulWidget {
 }
 
 class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
-  late int activeIndex;
+  int activeIndex = 0;
 
   @override
   void initState() {
-    activeIndex = StorageRepository.getInt(key: "active_language");
+    if (widget.isSetLanguage) {
+      activeIndex = StorageRepository.getInt(key: "active_language");
+    }
     super.initState();
   }
 
