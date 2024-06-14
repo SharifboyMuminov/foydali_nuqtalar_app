@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/blocs/font_style/font_style_bloc.dart';
 import 'package:foydali_nuqtalar/blocs/font_style/font_style_event.dart';
@@ -12,15 +11,14 @@ import 'package:foydali_nuqtalar/screens/home/dialog/show_logout_dialog.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/app_bar_button.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/line_grey.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/my_drawer.dart';
+import 'package:foydali_nuqtalar/screens/home/widget/set_background_font.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/set_font_family.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/setting_button.dart';
+import 'package:foydali_nuqtalar/screens/home/widget/set_text_align.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/slider_text_size.dart';
 import 'package:foydali_nuqtalar/screens/info/info_screen.dart';
 import 'package:foydali_nuqtalar/screens/them/them_screen.dart';
-import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
-import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -159,6 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const LenGrey(),
+              SetBackgroundFont(
+                color: state.backgroundColor,
+                onChangedColor: (Color value) {},
+              ),
+              const LenGrey(),
               CostumeSliderTextSize(
                 textStyle: state.textStyle,
                 onChanged: (double value) {
@@ -175,43 +178,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 onChanged: (String value) {},
               ),
               const LenGrey(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.we,
-                  vertical: 30.he,
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      "Matn tekkislanishi",
-                      style: AppTextStyle.seoulRobotoMedium.copyWith(
-                        fontSize: 16.sp,
-                        color: AppColors.c010A27,
-                      ),
-                    ),
-                    const Spacer(),
-                    SettingButton(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 28.we,
-                        vertical: 13.he,
-                      ),
-                      onTab: () {},
-                      active: state.textAlign == TextAlign.start,
-                      iconPath: AppImages.drawerSvg,
-                    ),
-                    8.getW(),
-                    SettingButton(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 28.we,
-                        vertical: 13.he,
-                      ),
-                      onTab: () {},
-                      active: state.textAlign == TextAlign.center,
-                      iconPath: AppImages.alignSvg,
-                    ),
-                  ],
-                ),
+              SetTextAlign(
+                textAlign: state.textAlign,
+                onChangedTextAlign: (TextAlign value) {
+                  context.read<FontStyleBloc>().add(
+                        FontStyleSetTextAlignEvent(
+                          textAlign: value,
+                        ),
+                      );
+                },
               ),
+              10.getH(),
             ],
           );
         },

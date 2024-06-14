@@ -20,6 +20,7 @@ class FontStyleBloc extends Bloc<FontStyleEvent, FontStyleState> {
         ) {
     on<FontStyleSetSizeEvent>(_setFontSize);
     on<FontStyleSetFontFamilyEvent>(_setFontFamily);
+    on<FontStyleSetTextAlignEvent>(_setTextAlign);
   }
 
   void _setFontSize(FontStyleSetSizeEvent event, emit) async {
@@ -28,6 +29,14 @@ class FontStyleBloc extends Bloc<FontStyleEvent, FontStyleState> {
         textStyle: state.textStyle.copyWith(
           fontSize: (event.fontSize),
         ),
+      ),
+    );
+  }
+
+  void _setTextAlign(FontStyleSetTextAlignEvent event, emit) async {
+    emit(
+      state.copyWith(
+        textAlign: event.textAlign,
       ),
     );
   }

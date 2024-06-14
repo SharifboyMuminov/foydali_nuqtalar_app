@@ -10,9 +10,9 @@ class SettingButton extends StatelessWidget {
     super.key,
     required this.onTab,
     required this.active,
-     this.title,
+    this.title,
     this.iconPath,
-    this.padding,
+    this.padding, this.backgroundColor,
   });
 
   final VoidCallback onTab;
@@ -20,6 +20,7 @@ class SettingButton extends StatelessWidget {
   final String? title;
   final String? iconPath;
   final EdgeInsets? padding;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,9 @@ class SettingButton extends StatelessWidget {
               iconPath!,
               width: 24.we,
               height: 24.we,
+              colorFilter: ColorFilter.mode(
+                  AppColors.c010A27.withOpacity(active ? 1 : 0.4),
+                  BlendMode.srcIn),
             ),
     );
   }

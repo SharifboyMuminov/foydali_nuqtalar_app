@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:equatable/equatable.dart';
 
 abstract class FontStyleEvent extends Equatable {}
@@ -18,4 +20,13 @@ class FontStyleSetFontFamilyEvent extends FontStyleEvent {
 
   @override
   List<Object?> get props => [fontFamily];
+}
+
+class FontStyleSetTextAlignEvent extends FontStyleEvent {
+  final TextAlign textAlign;
+
+  FontStyleSetTextAlignEvent({required this.textAlign});
+
+  @override
+  List<Object?> get props => [textAlign];
 }
