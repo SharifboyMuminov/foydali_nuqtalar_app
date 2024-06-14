@@ -13,4 +13,8 @@ class AppInfoModel {
       content: json['content'] as String? ?? "",
     );
   }
+
+  factory AppInfoModel.initial() {
+    return AppInfoModel(youtube: '', content: '');
+  }
 }

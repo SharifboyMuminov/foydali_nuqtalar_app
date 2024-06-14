@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/app_info/app_info_event.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
 import 'package:foydali_nuqtalar/data/api/api_provider.dart';
 import 'package:foydali_nuqtalar/data/repositories/app_info_repository.dart';
@@ -33,7 +34,7 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => AppInfoBloc(
               context.read<AppInfoRepository>(),
-            ),
+            )..add(AppInfoGetEvent()),
           ),
         ],
         child: ScreenUtilInit(

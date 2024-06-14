@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/blocs/app_info/app_info_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/app_info/app_info_state.dart';
+import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
+import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
@@ -33,41 +38,66 @@ class InfoScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20.we, vertical: 20.he),
-        child: Column(
-          children: [
-            Text(
-              """"Foydali Nuqtalar" mobil ilovasi inson salomatligini yaxshilash uchun akupunktura va akupressura usullarini o'rganishni osonlashtiradi. Ushbu ilova orqali siz tanadagi muayyan nuqtalar haqida ma'lumot olishingiz, ularni qanday topish va ularga qanday ta'sir ko'rsatish kerakligini o'rganishingiz mumkin. Ilova foydalanuvchilarga sog'lig'ini yaxshilash va turli kasalliklarni davolash uchun tabiiy va samarali usullarni taqdim etadi. Dasturda oson tushunarli ko'rsatmalar va vizual yordamchilar mavjud bo'lib, har qanday foydalanuvchi bu usullarni osongina qo'llashi mumkin.""",
-              style: AppTextStyle.seoulRobotoRegular.copyWith(
-                fontSize: 18.sp,
-                color: AppColors.c010A27,
+      body: BlocBuilder<AppInfoBloc, AppInfoState>(
+        builder: (BuildContext context, AppInfoState state) {
+          if (state.fromStatus == FromStatus.error) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  state.errorText,
+                  style: AppTextStyle.seoulRobotoRegular.copyWith(
+                    fontSize: 20.sp,
+                    color: AppColors.c010A27,
+                  ),
+                ),
+                GlobalMyButton(onTab: () {}, title: "Qayta urinib ko'rish"),
+              ],
+            );
+          }
+
+          if (state.fromStatus == FromStatus.success) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 20.we, vertical: 20.he),
+              child: Column(
+                children: [
+                  Text(
+                    """"Foydali Nuqtalar" mobil ilovasi inson salomatligini yaxshilash uchun akupunktura va akupressura usullarini o'rganishni osonlashtiradi. Ushbu ilova orqali siz tanadagi muayyan nuqtalar haqida ma'lumot olishingiz, ularni qanday topish va ularga qanday ta'sir ko'rsatish kerakligini o'rganishingiz mumkin. Ilova foydalanuvchilarga sog'lig'ini yaxshilash va turli kasalliklarni davolash uchun tabiiy va samarali usullarni taqdim etadi. Dasturda oson tushunarli ko'rsatmalar va vizual yordamchilar mavjud bo'lib, har qanday foydalanuvchi bu usullarni osongina qo'llashi mumkin.""",
+                    style: AppTextStyle.seoulRobotoRegular.copyWith(
+                      fontSize: 18.sp,
+                      color: AppColors.c010A27,
+                    ),
+                  ),
+                  25.getH(),
+                  Text(
+                    "Bizning maqsadimiz — har bir insonni sog'lom va baxtli hayot kechirishiga yordam berishdir.",
+                    style: AppTextStyle.seoulRobotoRegular.copyWith(
+                      fontSize: 18.sp,
+                      color: AppColors.c010A27,
+                    ),
+                  ),
+                  25.getH(),
+                  Text(
+                    "Ushbu kitob mualliflik huquqi qonuni bilan himoyalangan. Kitobdan nusxa ko‘chirish, muallifning nomi eslatilmasdan taqriz keltirish, muallifning ruhsatisiz chop etish va har qanday usulda tarqatish qonun bilan taqiqlanadi.",
+                    style: AppTextStyle.seoulRobotoRegular.copyWith(
+                      fontSize: 18.sp,
+                      color: AppColors.c010A27,
+                    ),
+                  ),
+                  17.getH(),
+                  SvgPicture.asset(
+                    AppImages.versionSvg,
+                    width: 61.we,
+                    height: 18.he,
+                  ),
+                ],
               ),
-            ),
-            25.getH(),
-            Text(
-              "Bizning maqsadimiz — har bir insonni sog'lom va baxtli hayot kechirishiga yordam berishdir.",
-              style: AppTextStyle.seoulRobotoRegular.copyWith(
-                fontSize: 18.sp,
-                color: AppColors.c010A27,
-              ),
-            ),
-            25.getH(),
-            Text(
-              "Ushbu kitob mualliflik huquqi qonuni bilan himoyalangan. Kitobdan nusxa ko‘chirish, muallifning nomi eslatilmasdan taqriz keltirish, muallifning ruhsatisiz chop etish va har qanday usulda tarqatish qonun bilan taqiqlanadi.",
-              style: AppTextStyle.seoulRobotoRegular.copyWith(
-                fontSize: 18.sp,
-                color: AppColors.c010A27,
-              ),
-            ),
-            17.getH(),
-            SvgPicture.asset(
-              AppImages.versionSvg,
-              width: 61.we,
-              height: 18.he,
-            ),
-          ],
-        ),
+            );
+          }
+
+          return const Center(child: CircularProgressIndicator.adaptive());
+        },
       ),
     );
   }
