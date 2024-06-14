@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:foydali_nuqtalar/data/api/api_client.dart';
+import 'package:foydali_nuqtalar/data/models/app_info/app_info_model.dart';
 import 'package:foydali_nuqtalar/data/models/network_response.dart';
 import 'package:foydali_nuqtalar/data/models/user/user_model.dart';
 
@@ -146,4 +147,31 @@ class ApiProvider extends ApiClient {
   }
 
 //TODO End Auth ------------------------------------------------------------
+
+//TODO start App info ------------------------------------------------------------
+
+  Future<NetworkResponse> getAppInfo() async {
+    NetworkResponse networkResponse = NetworkResponse();
+    try {
+      Response response = await dio.get(
+        'https://nuqtalar.idrok.group/api/infos/info/',
+      );
+
+      if (response.statusCode == 200) {
+        networkResponse.data = (response.data["results"] as List?)
+                ?.map((e) => AppInfoModel.fromJson(e)) ??
+            [];
+      } else {
+        networkResponse.errorText = "Error :(";
+      }
+    } on SocketException {
+      networkResponse.errorText = "No Internet connection";
+    } catch (error) {
+      networkResponse.errorText = error.toString();
+    }
+
+    return networkResponse;
+  }
+
+//TODO End App info ------------------------------------------------------------
 }

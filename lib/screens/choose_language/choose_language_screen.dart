@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/screens/choose_language/widget/language_button.dart';
 import 'package:foydali_nuqtalar/screens/instruction_video/instruction_video_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
@@ -20,7 +21,13 @@ class ChooseLanguageScreen extends StatefulWidget {
 }
 
 class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
-  int activeIndex = 0;
+  late int activeIndex;
+
+  @override
+  void initState() {
+    activeIndex = StorageRepository.getInt(key: "active_language");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +67,8 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
             LanguageMyButton(
               onTab: () {
                 activeIndex = 0;
+                StorageRepository.setInt(key: "active_language", value: 0);
+
                 setState(() {});
               },
               title: 'O‘zbek tili',
@@ -69,6 +78,8 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
             LanguageMyButton(
               onTab: () {
                 activeIndex = 1;
+                StorageRepository.setInt(key: "active_language", value: 1);
+
                 setState(() {});
               },
               title: 'Русский',
@@ -78,6 +89,8 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
             LanguageMyButton(
               onTab: () {
                 activeIndex = 2;
+                StorageRepository.setInt(key: "active_language", value: 2);
+
                 setState(() {});
               },
               title: 'English',
@@ -87,6 +100,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
             LanguageMyButton(
               onTab: () {
                 activeIndex = 3;
+                StorageRepository.setInt(key: "active_language", value: 3);
                 setState(() {});
               },
               title: 'Français',

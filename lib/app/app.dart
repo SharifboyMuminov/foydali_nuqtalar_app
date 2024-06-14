@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foydali_nuqtalar/blocs/app_info/app_info_bloc.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
 import 'package:foydali_nuqtalar/data/api/api_provider.dart';
+import 'package:foydali_nuqtalar/data/repositories/app_info_repository.dart';
 import 'package:foydali_nuqtalar/data/repositories/auth_repository.dart';
 import 'package:foydali_nuqtalar/screens/splash/splash_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
@@ -19,6 +21,7 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => AuthRepository(_apiProvider)),
+        RepositoryProvider(create: (_) => AppInfoRepository(_apiProvider)),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -27,9 +30,14 @@ class App extends StatelessWidget {
               context.read<AuthRepository>(),
             ),
           ),
+          BlocProvider(
+            create: (context) => AppInfoBloc(
+              context.read<AppInfoRepository>(),
+            ),
+          ),
         ],
         child: ScreenUtilInit(
-          designSize: const Size(414, 896),
+          designSize: const Size(393, 852),
           builder: (context, child) {
             ScreenUtil.init(context);
             return MaterialApp(
