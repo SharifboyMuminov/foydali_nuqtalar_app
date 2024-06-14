@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/app_info/app_info_event.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_state.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
@@ -52,7 +53,14 @@ class InfoScreen extends StatelessWidget {
                     color: AppColors.c010A27,
                   ),
                 ),
-                GlobalMyButton(onTab: () {}, title: "Qayta urinib ko'rish"),
+                GlobalMyButton(
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 40.we, vertical: 40.he),
+                  onTab: () {
+                    context.read<AppInfoBloc>().add(AppInfoGetEvent());
+                  },
+                  title: "Qayta urinib ko'rish",
+                ),
               ],
             );
           }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_event.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_state.dart';
@@ -29,12 +28,23 @@ class AppInfoBloc extends Bloc<AppInfoEvent, AppInfoState> {
     NetworkResponse networkResponse = await _appInfoRepository.getAppInfo();
 
     if (networkResponse.errorText.isEmpty) {
-      emit(
-        state.copyWith(
-          fromStatus: FromStatus.success,
-          appInfoModel: (networkResponse.data as List<AppInfoModel>).first,
-        ),
-      );
+      List appInfoModels = (networkResponse.data as List);
+
+      if (appInfoModels.isNotEmpty) {
+        emit(
+          state.copyWith(
+            fromStatus: FromStatus.success,
+            appInfoModel: appInfoModels.first,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            fromStatus: FromStatus.error,
+            errorText: "Empty Data :(",
+          ),
+        );
+      }
     } else {
       emit(
         state.copyWith(
