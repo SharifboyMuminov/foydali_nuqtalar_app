@@ -21,6 +21,11 @@ class FontStyleBloc extends Bloc<FontStyleEvent, FontStyleState> {
     on<FontStyleSetSizeEvent>(_setFontSize);
     on<FontStyleSetFontFamilyEvent>(_setFontFamily);
     on<FontStyleSetTextAlignEvent>(_setTextAlign);
+    on<FontStyleSetBackgroundColorEvent>(_setBackgroundColor);
+  }
+
+  void _setBackgroundColor(FontStyleSetBackgroundColorEvent event, emit) async {
+    emit(state.copyWith(backgroundColor: event.backgroundColor));
   }
 
   void _setFontSize(FontStyleSetSizeEvent event, emit) async {

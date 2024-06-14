@@ -33,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late final String fullName;
   late final String email;
 
+  bool showSetting = false;
+
   @override
   void initState() {
     fullName = StorageRepository.getString(key: "user_full_name");
@@ -42,101 +44,106 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawerEnableOpenDragGesture: false,
-      key: _key,
-      drawer: MyDrawer(
-        fullName: fullName,
-        email: email,
-        onTabRegister: () {},
-        onTabProfile: () {},
-        onTabTheme: () {
-          Navigator.pop(context);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const ThemeScreen();
-              },
-            ),
-          );
-        },
-        onTabLanguage: () {
-          Navigator.pop(context);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const ChooseLanguageScreen(
-                  isSetLanguage: true,
-                );
-              },
-            ),
-          );
-        },
-        onTabInfo: () {
-          Navigator.pop(context);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const InfoScreen();
-              },
-            ),
-          );
-        },
-        onTabVideo: () {},
-        onTabLogout: () {
-          showLogoutDialog(
-            context,
-            onTanExit: () {
+    return BlocBuilder<FontStyleBloc, FontStyleState>(
+      builder: (BuildContext context, FontStyleState state) {
+        return Scaffold(
+          backgroundColor: state.backgroundColor,
+          drawerEnableOpenDragGesture: false,
+          key: _key,
+          drawer: MyDrawer(
+            fullName: fullName,
+            email: email,
+            onTabRegister: _onTabRegister,
+            onTabProfile: () {},
+            onTabTheme: () {
               Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const ThemeScreen();
+                  },
+                ),
+              );
             },
-            onTabOk: () {
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                builder: (context) {
-                  return const SignUpScreen();
+            onTabLanguage: () {
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const ChooseLanguageScreen(
+                      isSetLanguage: true,
+                    );
+                  },
+                ),
+              );
+            },
+            onTabInfo: () {
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const InfoScreen();
+                  },
+                ),
+              );
+            },
+            onTabVideo: () {},
+            onTabLogout: () {
+              showLogoutDialog(
+                context,
+                onTanExit: () {
+                  Navigator.pop(context);
                 },
-              ), (route) => false);
+                onTabOk: () {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const SignUpScreen();
+                    },
+                  ), (route) => false);
+                },
+              );
             },
-          );
-        },
-      ),
-      appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            _key.currentState!.openDrawer();
-          },
-          icon: SvgPicture.asset(
-            AppImages.drawerSvg,
-            width: 24.we,
-            height: 24.we,
           ),
-        ),
-        title: fullName.isNotEmpty
-            ? null
-            : AppBarMyButton(
-                onTab: () {},
+          appBar: AppBar(
+            backgroundColor: state.backgroundColor,
+            centerTitle: true,
+            leading: IconButton(
+              onPressed: () {
+                _key.currentState!.openDrawer();
+              },
+              icon: SvgPicture.asset(
+                AppImages.drawerSvg,
+                width: 24.we,
+                height: 24.we,
               ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              AppImages.settingSvg,
-              width: 24.we,
-              height: 24.we,
             ),
+            title: fullName.isNotEmpty
+                ? null
+                : AppBarMyButton(
+                    onTab: _onTabRegister,
+                  ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showSetting = !showSetting;
+                  setState(() {});
+                },
+                icon: SvgPicture.asset(
+                  AppImages.settingSvg,
+                  width: 24.we,
+                  height: 24.we,
+                ),
+              ),
+              6.getW(),
+            ],
           ),
-          6.getW(),
-        ],
-      ),
-      body: BlocBuilder<FontStyleBloc, FontStyleState>(
-        builder: (BuildContext context, FontStyleState state) {
-          return Column(
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
@@ -156,43 +163,68 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              const LenGrey(),
-              SetBackgroundFont(
-                color: state.backgroundColor,
-                onChangedColor: (Color value) {},
-              ),
-              const LenGrey(),
-              CostumeSliderTextSize(
-                textStyle: state.textStyle,
-                onChanged: (double value) {
-                  context.read<FontStyleBloc>().add(
-                        FontStyleSetSizeEvent(
-                          fontSize: value,
-                        ),
-                      );
-                },
-              ),
-              const LenGrey(),
-              SetFontFamily(
-                textStyle: state.textStyle,
-                onChanged: (String value) {},
-              ),
-              const LenGrey(),
-              SetTextAlign(
-                textAlign: state.textAlign,
-                onChangedTextAlign: (TextAlign value) {
-                  context.read<FontStyleBloc>().add(
-                        FontStyleSetTextAlignEvent(
-                          textAlign: value,
-                        ),
-                      );
-                },
-              ),
-              10.getH(),
+              if (showSetting)
+                Column(
+                  children: [
+                    const LenGrey(),
+                    SetBackgroundFont(
+                      color: state.backgroundColor,
+                      onChangedColor: (Color value) {
+                        context.read<FontStyleBloc>().add(
+                              FontStyleSetBackgroundColorEvent(
+                                backgroundColor: value,
+                              ),
+                            );
+                      },
+                    ),
+                    const LenGrey(),
+                    CostumeSliderTextSize(
+                      textStyle: state.textStyle,
+                      onChanged: (double value) {
+                        context.read<FontStyleBloc>().add(
+                              FontStyleSetSizeEvent(
+                                fontSize: value,
+                              ),
+                            );
+                      },
+                    ),
+                    const LenGrey(),
+                    SetFontFamily(
+                      textStyle: state.textStyle,
+                      onChanged: (String value) {
+                        context.read<FontStyleBloc>().add(
+                              FontStyleSetFontFamilyEvent(
+                                fontFamily: value,
+                              ),
+                            );
+                      },
+                    ),
+                    const LenGrey(),
+                    SetTextAlign(
+                      textAlign: state.textAlign,
+                      onChangedTextAlign: (TextAlign value) {
+                        context.read<FontStyleBloc>().add(
+                              FontStyleSetTextAlignEvent(
+                                textAlign: value,
+                              ),
+                            );
+                      },
+                    ),
+                    10.getH(),
+                  ],
+                ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
+  }
+
+  _onTabRegister() {
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+      builder: (context) {
+        return const SignUpScreen();
+      },
+    ), (route) => false);
   }
 }

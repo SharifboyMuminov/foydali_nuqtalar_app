@@ -30,3 +30,12 @@ class FontStyleSetTextAlignEvent extends FontStyleEvent {
   @override
   List<Object?> get props => [textAlign];
 }
+
+class FontStyleSetBackgroundColorEvent extends FontStyleEvent {
+  final Color backgroundColor;
+
+  FontStyleSetBackgroundColorEvent({required this.backgroundColor});
+
+  @override
+  List<Object?> get props => [backgroundColor];
+}
