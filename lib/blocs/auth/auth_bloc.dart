@@ -14,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             statusMessage: "",
             message: '',
             userEmail: '',
+            password: '',
           ),
         ) {
     on<AuthRegisterEvent>(_register);
@@ -44,6 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(
           fromStatus: FromStatus.success,
           statusMessage: "good",
+
         ),
       );
     } else {

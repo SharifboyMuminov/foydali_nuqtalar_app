@@ -55,8 +55,8 @@ class AuthMyInput extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(
-            color: AppColors.c010A27.withOpacity(0.40),
-            width: 2.we,
+            color: AppColors.cF07448,
+            width: 3.we,
           ),
         ),
         enabledBorder: OutlineInputBorder(

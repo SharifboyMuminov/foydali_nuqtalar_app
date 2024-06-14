@@ -6,9 +6,11 @@ class AuthState extends Equatable {
   final String statusMessage;
   final String message;
   final String userEmail;
+  final String password;
   final FromStatus fromStatus;
 
   const AuthState({
+    required this.password,
     required this.userEmail,
     required this.fromStatus,
     required this.message,
@@ -21,6 +23,7 @@ class AuthState extends Equatable {
     String? statusMessage,
     String? message,
     String? userEmail,
+    String? password,
     FromStatus? fromStatus,
   }) {
     return AuthState(
@@ -29,6 +32,7 @@ class AuthState extends Equatable {
       statusMessage: statusMessage ?? this.statusMessage,
       message: message ?? this.message,
       userEmail: userEmail ?? this.userEmail,
+      password: password ?? this.password,
     );
   }
 
@@ -39,5 +43,6 @@ class AuthState extends Equatable {
         statusMessage,
         message,
         userEmail,
+        password,
       ];
 }
