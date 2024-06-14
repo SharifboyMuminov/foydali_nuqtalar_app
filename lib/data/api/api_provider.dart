@@ -200,7 +200,7 @@ class ApiProvider extends ApiClient {
 
       if (response.statusCode == 200) {
         networkResponse.data = (response.data["results"] as List?)
-                ?.map((e) => BookModel.fromJson(e["translate"]["uz"]))
+                ?.map((e) => BookModel.fromJson(e))
                 .toList() ??
             [];
       } else {

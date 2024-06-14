@@ -11,7 +11,7 @@ import 'package:foydali_nuqtalar/screens/auth/reset_password_confirm/reset_passw
 import 'package:foydali_nuqtalar/screens/auth/verification/verification_screen.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_button.dart';
 import 'package:foydali_nuqtalar/screens/auth/widget/auth_input.dart';
-import 'package:foydali_nuqtalar/screens/home/home_screen.dart';
+import 'package:foydali_nuqtalar/screens/books/books_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
@@ -241,7 +241,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } else if (state.fromStatus == FromStatus.authenticated) {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
         builder: (context) {
-          return const HomeScreen();
+          return const BooksScreen();
         },
       ), (route) => false);
     } else if (state.fromStatus == FromStatus.error) {
