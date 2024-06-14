@@ -158,10 +158,10 @@ class ApiProvider extends ApiClient {
       );
 
       if (response.statusCode == 200) {
-        // debugPrint((response.data["results"] as List).first.toString());
+        debugPrint((response.data["results"] as List).first.toString());
 
         networkResponse.data = (response.data["results"] as List?)
-                ?.map((e) => AppInfoModel.fromJson(e)) ??
+                ?.map((e) => AppInfoModel.fromJson(e)).toList() ??
             [];
       } else {
         networkResponse.errorText = "Error :(";

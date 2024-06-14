@@ -29,11 +29,10 @@ class AppInfoBloc extends Bloc<AppInfoEvent, AppInfoState> {
     NetworkResponse networkResponse = await _appInfoRepository.getAppInfo();
 
     if (networkResponse.errorText.isEmpty) {
-      debugPrint("---------${networkResponse.data} ---------");
       emit(
         state.copyWith(
           fromStatus: FromStatus.success,
-          appInfoModel: networkResponse.data,
+          appInfoModel: (networkResponse.data as List<AppInfoModel>).first,
         ),
       );
     } else {

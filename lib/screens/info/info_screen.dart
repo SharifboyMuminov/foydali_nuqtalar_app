@@ -58,34 +58,27 @@ class InfoScreen extends StatelessWidget {
           }
 
           if (state.fromStatus == FromStatus.success) {
+            String text = state.appInfoModel.content.replaceAll("</p>", "");
+            text = text.replaceAll("<p>", "");
+            text = text.replaceAll("<br>", " ");
             return SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.we, vertical: 20.he),
+              padding: EdgeInsets.only(
+                left: 20.we,
+                right: 20.we,
+                top: 20.he,
+                bottom: 20.he,
+              ),
               child: Column(
                 children: [
+                  25.getH(),
                   Text(
-                    """"Foydali Nuqtalar" mobil ilovasi inson salomatligini yaxshilash uchun akupunktura va akupressura usullarini o'rganishni osonlashtiradi. Ushbu ilova orqali siz tanadagi muayyan nuqtalar haqida ma'lumot olishingiz, ularni qanday topish va ularga qanday ta'sir ko'rsatish kerakligini o'rganishingiz mumkin. Ilova foydalanuvchilarga sog'lig'ini yaxshilash va turli kasalliklarni davolash uchun tabiiy va samarali usullarni taqdim etadi. Dasturda oson tushunarli ko'rsatmalar va vizual yordamchilar mavjud bo'lib, har qanday foydalanuvchi bu usullarni osongina qo'llashi mumkin.""",
+                    text,
                     style: AppTextStyle.seoulRobotoRegular.copyWith(
                       fontSize: 18.sp,
                       color: AppColors.c010A27,
                     ),
                   ),
                   25.getH(),
-                  Text(
-                    "Bizning maqsadimiz — har bir insonni sog'lom va baxtli hayot kechirishiga yordam berishdir.",
-                    style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      fontSize: 18.sp,
-                      color: AppColors.c010A27,
-                    ),
-                  ),
-                  25.getH(),
-                  Text(
-                    "Ushbu kitob mualliflik huquqi qonuni bilan himoyalangan. Kitobdan nusxa ko‘chirish, muallifning nomi eslatilmasdan taqriz keltirish, muallifning ruhsatisiz chop etish va har qanday usulda tarqatish qonun bilan taqiqlanadi.",
-                    style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      fontSize: 18.sp,
-                      color: AppColors.c010A27,
-                    ),
-                  ),
-                  17.getH(),
                   SvgPicture.asset(
                     AppImages.versionSvg,
                     width: 61.we,
