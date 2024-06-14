@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/screens/auth/sign_up/sing_up_screen.dart';
+import 'package:foydali_nuqtalar/screens/choose_language/choose_language_screen.dart';
 import 'package:foydali_nuqtalar/screens/home/dialog/show_logout_dialog.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/my_drawer.dart';
 import 'package:foydali_nuqtalar/screens/info/info_screen.dart';
@@ -37,7 +39,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
-        onTabLanguage: () {},
+        onTabLanguage: () {
+          Navigator.pop(context);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const ChooseLanguageScreen(
+                  isSetLanguage: true,
+                );
+              },
+            ),
+          );
+        },
         onTabInfo: () {
           Navigator.pop(context);
 
@@ -54,8 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
         onTabLogout: () {
           showLogoutDialog(
             context,
-            onTanExit: () {},
-            onTabOk: () {},
+            onTanExit: () {
+              Navigator.pop(context);
+            },
+            onTabOk: () {
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                builder: (context) {
+                  return const SignUpScreen();
+                },
+              ), (route) => false);
+            },
           );
         },
       ),

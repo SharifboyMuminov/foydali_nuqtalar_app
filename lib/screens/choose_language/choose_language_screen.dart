@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/screens/choose_language/widget/language_button.dart';
 import 'package:foydali_nuqtalar/screens/instruction_video/instruction_video_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
+import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
 class ChooseLanguageScreen extends StatefulWidget {
-  const ChooseLanguageScreen({super.key});
+  const ChooseLanguageScreen({super.key, this.isSetLanguage = false});
+
+  final bool isSetLanguage;
 
   @override
   State<ChooseLanguageScreen> createState() => _ChooseLanguageScreenState();
@@ -38,6 +42,18 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
               color: AppColors.c010A27,
             ),
           ),
+          leading: widget.isSetLanguage
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: SvgPicture.asset(
+                    AppImages.arrowBackSvg,
+                    width: 24.we,
+                    height: 24.we,
+                  ),
+                )
+              : null,
         ),
         body: Column(
           children: [
@@ -78,19 +94,20 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
               active: activeIndex == 3,
             ),
             const Spacer(),
-            GlobalMyButton(
-              onTab: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const InstructionVideoScreen();
-                    },
-                  ),
-                );
-              },
-              title: 'Davom etish',
-            ),
+            if (!widget.isSetLanguage)
+              GlobalMyButton(
+                onTab: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const InstructionVideoScreen();
+                      },
+                    ),
+                  );
+                },
+                title: 'Davom etish',
+              ),
           ],
         ),
       ),

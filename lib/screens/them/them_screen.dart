@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/screens/them/widget/theme_list_tile.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
@@ -15,8 +16,16 @@ class ThemeScreen extends StatefulWidget {
 }
 
 class _ThemeScreenState extends State<ThemeScreen> {
-  bool theme = false;
-  bool auto = false;
+  late bool isTheme;
+  late bool autoTheme;
+
+  @override
+  void initState() {
+    isTheme = StorageRepository.getBool(key: "theme");
+    autoTheme = StorageRepository.getBool(key: "auto");
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,27 +55,44 @@ class _ThemeScreenState extends State<ThemeScreen> {
         children: [
           ThemeMyListTileButton(
             onTab: () {
-              theme = !theme;
-              setState(() {});
+              if (!autoTheme) {
+                isTheme = !isTheme;
+                setState(() {});
+                StorageRepository.setBool(key: "theme", value: isTheme);
+              }
             },
             onChanged: (bool value) {
-              theme = value;
-              setState(() {});
+              if (!autoTheme) {
+                StorageRepository.setBool(key: "theme", value: value);
+
+                isTheme = value;
+                setState(() {});
+              }
             },
-            value: theme,
+            value: isTheme,
             title: 'Tungi rejim',
             leadingIconPath: AppImages.themDarkSvg,
           ),
           ThemeMyListTileButton(
             onTab: () {
-              auto = !auto;
+              autoTheme = !autoTheme;
+              StorageRepository.setBool(key: "auto", value: autoTheme);
+              if (autoTheme) {
+                isTheme = false;
+                StorageRepository.setBool(key: "theme", value: false);
+              }
               setState(() {});
             },
             onChanged: (bool value) {
-              auto = value;
+              autoTheme = value;
+              StorageRepository.setBool(key: "auto", value: autoTheme);
+              if (autoTheme) {
+                isTheme = false;
+                StorageRepository.setBool(key: "theme", value: false);
+              }
               setState(() {});
             },
-            value: auto,
+            value: autoTheme,
             title: 'Avto (qurilmadagidek)',
             leadingIconPath: AppImages.systemSvg,
           ),
