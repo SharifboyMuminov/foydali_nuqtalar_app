@@ -44,30 +44,33 @@ class MyDrawer extends StatelessWidget {
           45.getH(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.we),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "FOYDALI",
-                  style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
-                    fontSize: 14.sp,
-                    color: AppColors.c010A27,
-                  ),
-                ),
-                SvgPicture.asset(
-                  AppImages.splashIconSvg,
-                  width: 48.we,
-                  height: 48.we,
-                ),
-                Text(
-                  "NUQTALAR",
-                  style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
-                    fontSize: 16.sp,
-                    color: AppColors.c010A27,
-                  ),
-                ),
-              ],
+            child: Image.asset(
+              "assets/images/img_1.png",
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       "FOYDALI",
+            //       style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
+            //         fontSize: 14.sp,
+            //         color: AppColors.c010A27,
+            //       ),
+            //     ),
+            //     SvgPicture.asset(
+            //       AppImages.splashIconSvg,
+            //       width: 48.we,
+            //       height: 48.we,
+            //     ),
+            //     Text(
+            //       "NUQTALAR",
+            //       style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
+            //         fontSize: 16.sp,
+            //         color: AppColors.c010A27,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
           if (fullName.isEmpty)
             GlobalMyButton(
