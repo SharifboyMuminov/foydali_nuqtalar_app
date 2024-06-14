@@ -22,7 +22,7 @@ class AppImages {
   static String versionSvg = "assets/icons/version.svg";
   static String systemSvg = "assets/icons/system.svg";
   static String settingSvg = "assets/icons/setting.svg";
-
+  static String alignSvg = "assets/icons/align.svg";
 
 //Image
 }

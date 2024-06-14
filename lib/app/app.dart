@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_bloc.dart';
 import 'package:foydali_nuqtalar/blocs/app_info/app_info_event.dart';
 import 'package:foydali_nuqtalar/blocs/auth/auth_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/font_style/font_style_bloc.dart';
 import 'package:foydali_nuqtalar/data/api/api_provider.dart';
 import 'package:foydali_nuqtalar/data/repositories/app_info_repository.dart';
 import 'package:foydali_nuqtalar/data/repositories/auth_repository.dart';
@@ -36,6 +37,7 @@ class App extends StatelessWidget {
               context.read<AppInfoRepository>(),
             )..add(AppInfoGetEvent()),
           ),
+          BlocProvider(create: (_) => FontStyleBloc()),
         ],
         child: ScreenUtilInit(
           designSize: const Size(393, 852),

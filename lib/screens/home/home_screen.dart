@@ -1,13 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/blocs/font_style/font_style_bloc.dart';
+import 'package:foydali_nuqtalar/blocs/font_style/font_style_event.dart';
+import 'package:foydali_nuqtalar/blocs/font_style/font_style_state.dart';
 import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/screens/auth/sign_up/sing_up_screen.dart';
 import 'package:foydali_nuqtalar/screens/choose_language/choose_language_screen.dart';
 import 'package:foydali_nuqtalar/screens/home/dialog/show_logout_dialog.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/app_bar_button.dart';
+import 'package:foydali_nuqtalar/screens/home/widget/line_grey.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/my_drawer.dart';
+import 'package:foydali_nuqtalar/screens/home/widget/set_font_family.dart';
+import 'package:foydali_nuqtalar/screens/home/widget/setting_button.dart';
+import 'package:foydali_nuqtalar/screens/home/widget/slider_text_size.dart';
 import 'package:foydali_nuqtalar/screens/info/info_screen.dart';
 import 'package:foydali_nuqtalar/screens/them/them_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
@@ -24,11 +31,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-
-  TextStyle _currentTextStyle = TextStyle(
-    fontSize: 18.sp,
-    color: AppColors.c010A27,
-  );
 
   late final String fullName;
   late final String email;
@@ -134,63 +136,85 @@ class _HomeScreenState extends State<HomeScreen> {
           6.getW(),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.we,
-                vertical: 20.we,
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    """Qadimiy rivoyatlarga ko‘ra, Xitoyda bir dehqon muntazam bosh og‘rig‘idan qiynalib yurgan. Bir kun dalada yer chopayotganda, adashib oyog‘iga ketmon bilan zarba berib yuboradi. To‘satdan bosh og‘riq taqa-taq to‘xtaydi. Bir qancha vaqt o‘tib, mamlakat bo‘ylab boshi og‘rigan insonlar oyoqlarini ketmon urishga tushib ketishadi. Bundan xabar topgan imperator saroy tabiblariga oddiyroq va qulayroq usul topishni buyuradi. Xullas, izlanishlar va turli bemorlarda tajriba va kuzatuvlar natijasida ma’lum bir nuqtalarni igna, kuydirish va uqalash orqali bemorlarni davolashni boshlashadi. Keyinchalik, bu usullar Malayziya, Indoneziya, Filippin, Yaponiya, Vetnam, Tayland va Koreyaga tarqaldi. Men o‘zim 25 yildan ko‘p harbiy qo‘l jangi usullaridan instruktor bo‘lib ishlaganman. Jangovar sportlarda inson badanining har qanday joyiga zarba berilsa, bir xilda ta’sir ko‘rsatmasligi ma'lum holat. Masalan, bor kuch bilan yuz qismiga musht ursangiz, zarba yegan inson ko‘p hollarda bunga chidashi mumkin. Lekin shu zarba kuchidan bir necha barobar kuchsiz zarbani ma'lum bir nuqtaga ursangiz, inson hushidan ketib yiqilishi, hattoki, o‘lishi ham mumkin. Shunday nuqtalar bor-ki, ularga zarba tushganda inson umumiy yoki qisman falaj (paralich) holatiga tushadi. Qo‘l va oyoqlar qisman yoki butunlay shol bo‘lib qoladi.""",
-                    style: _currentTextStyle,
+      body: BlocBuilder<FontStyleBloc, FontStyleState>(
+        builder: (BuildContext context, FontStyleState state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.we,
+                    vertical: 20.we,
                   ),
-                ],
+                  child: Column(
+                    children: [
+                      Text(
+                        textAlign: state.textAlign,
+                        """Qadimiy rivoyatlarga ko‘ra, Xitoyda bir dehqon muntazam bosh og‘rig‘idan qiynalib yurgan. Bir kun dalada yer chopayotganda, adashib oyog‘iga ketmon bilan zarba berib yuboradi. To‘satdan bosh og‘riq taqa-taq to‘xtaydi. Bir qancha vaqt o‘tib, mamlakat bo‘ylab boshi og‘rigan insonlar oyoqlarini ketmon urishga tushib ketishadi. Bundan xabar topgan imperator saroy tabiblariga oddiyroq va qulayroq usul topishni buyuradi. Xullas, izlanishlar va turli bemorlarda tajriba va kuzatuvlar natijasida ma’lum bir nuqtalarni igna, kuydirish va uqalash orqali bemorlarni davolashni boshlashadi. Keyinchalik, bu usullar Malayziya, Indoneziya, Filippin, Yaponiya, Vetnam, Tayland va Koreyaga tarqaldi. Men o‘zim 25 yildan ko‘p harbiy qo‘l jangi usullaridan instruktor bo‘lib ishlaganman. Jangovar sportlarda inson badanining har qanday joyiga zarba berilsa, bir xilda ta’sir ko‘rsatmasligi ma'lum holat. Masalan, bor kuch bilan yuz qismiga musht ursangiz, zarba yegan inson ko‘p hollarda bunga chidashi mumkin. Lekin shu zarba kuchidan bir necha barobar kuchsiz zarbani ma'lum bir nuqtaga ursangiz, inson hushidan ketib yiqilishi, hattoki, o‘lishi ham mumkin. Shunday nuqtalar bor-ki, ularga zarba tushganda inson umumiy yoki qisman falaj (paralich) holatiga tushadi. Qo‘l va oyoqlar qisman yoki butunlay shol bo‘lib qoladi.""",
+                        style: state.textStyle,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.we, vertical: 20.he),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Slider.adaptive(
-                    // secondaryTrackValue: 18,
-                    mouseCursor: MouseCursor.defer,
-                    autofocus: true,
-                    thumbColor: AppColors.cF07448,
-                    activeColor: AppColors.cF07448,
-                    inactiveColor: AppColors.c010A27.withOpacity(0.08),
-                    value: _currentTextStyle.fontSize ?? 30,
-                    min: 14.sp,
-                    max: 32.sp,
-                    divisions: 30,
-                    label:
-                        (_currentTextStyle.fontSize ?? 16).round().toString(),
-                    onChanged: (double value) {
-                      setState(() {
-                        _currentTextStyle = _currentTextStyle.copyWith(
+              const LenGrey(),
+              CostumeSliderTextSize(
+                textStyle: state.textStyle,
+                onChanged: (double value) {
+                  context.read<FontStyleBloc>().add(
+                        FontStyleSetSizeEvent(
                           fontSize: value,
-                        );
-                      });
-                    },
-                  ),
+                        ),
+                      );
+                },
+              ),
+              const LenGrey(),
+              SetFontFamily(
+                textStyle: state.textStyle,
+                onChanged: (String value) {},
+              ),
+              const LenGrey(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.we,
+                  vertical: 30.he,
                 ),
-                10.getW(),
-                Text(
-                  (_currentTextStyle.fontSize ?? 16).round().toString(),
-                  style: AppTextStyle.seoulRobotoMedium.copyWith(
-                    color: AppColors.c010A27,
-                    fontSize: 16.sp,
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      "Matn tekkislanishi",
+                      style: AppTextStyle.seoulRobotoMedium.copyWith(
+                        fontSize: 16.sp,
+                        color: AppColors.c010A27,
+                      ),
+                    ),
+                    const Spacer(),
+                    SettingButton(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 28.we,
+                        vertical: 13.he,
+                      ),
+                      onTab: () {},
+                      active: state.textAlign == TextAlign.start,
+                      iconPath: AppImages.drawerSvg,
+                    ),
+                    8.getW(),
+                    SettingButton(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 28.we,
+                        vertical: 13.he,
+                      ),
+                      onTab: () {},
+                      active: state.textAlign == TextAlign.center,
+                      iconPath: AppImages.alignSvg,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-        ],
+              ),
+            ],
+          );
+        },
       ),
     );
   }
