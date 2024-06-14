@@ -7,27 +7,29 @@ import 'package:foydali_nuqtalar/blocs/font_style/font_style_state.dart';
 import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/screens/auth/sign_up/sing_up_screen.dart';
 import 'package:foydali_nuqtalar/screens/choose_language/choose_language_screen.dart';
-import 'package:foydali_nuqtalar/screens/home/dialog/show_logout_dialog.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/app_bar_button.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/line_grey.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/my_drawer.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/set_background_font.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/set_font_family.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/set_text_align.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/slider_text_size.dart';
 import 'package:foydali_nuqtalar/screens/info/info_screen.dart';
+import 'package:foydali_nuqtalar/screens/settings/dialog/show_logout_dialog.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/app_bar_button.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/line_grey.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/my_drawer.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/set_background_font.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/set_font_family.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/set_text_align.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/slider_text_size.dart';
 import 'package:foydali_nuqtalar/screens/them/them_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SettingScreen extends StatefulWidget {
+  const SettingScreen({super.key, required this.text});
+
+  final String text;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SettingScreen> createState() => _SettingScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SettingScreenState extends State<SettingScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   late final String fullName;
@@ -156,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         textAlign: state.textAlign,
-                        """Qadimiy rivoyatlarga ko‘ra, Xitoyda bir dehqon muntazam bosh og‘rig‘idan qiynalib yurgan. Bir kun dalada yer chopayotganda, adashib oyog‘iga ketmon bilan zarba berib yuboradi. To‘satdan bosh og‘riq taqa-taq to‘xtaydi. Bir qancha vaqt o‘tib, mamlakat bo‘ylab boshi og‘rigan insonlar oyoqlarini ketmon urishga tushib ketishadi. Bundan xabar topgan imperator saroy tabiblariga oddiyroq va qulayroq usul topishni buyuradi. Xullas, izlanishlar va turli bemorlarda tajriba va kuzatuvlar natijasida ma’lum bir nuqtalarni igna, kuydirish va uqalash orqali bemorlarni davolashni boshlashadi. Keyinchalik, bu usullar Malayziya, Indoneziya, Filippin, Yaponiya, Vetnam, Tayland va Koreyaga tarqaldi. Men o‘zim 25 yildan ko‘p harbiy qo‘l jangi usullaridan instruktor bo‘lib ishlaganman. Jangovar sportlarda inson badanining har qanday joyiga zarba berilsa, bir xilda ta’sir ko‘rsatmasligi ma'lum holat. Masalan, bor kuch bilan yuz qismiga musht ursangiz, zarba yegan inson ko‘p hollarda bunga chidashi mumkin. Lekin shu zarba kuchidan bir necha barobar kuchsiz zarbani ma'lum bir nuqtaga ursangiz, inson hushidan ketib yiqilishi, hattoki, o‘lishi ham mumkin. Shunday nuqtalar bor-ki, ularga zarba tushganda inson umumiy yoki qisman falaj (paralich) holatiga tushadi. Qo‘l va oyoqlar qisman yoki butunlay shol bo‘lib qoladi.""",
+                        widget.text,
                         style: state.textStyle,
                       ),
                     ],

@@ -39,7 +39,7 @@ class BookMyButton extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {},
+      onTap: onTab,
       contentPadding: EdgeInsets.symmetric(
         horizontal: 20.we,
         vertical: 16.he,

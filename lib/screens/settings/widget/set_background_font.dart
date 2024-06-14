@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foydali_nuqtalar/screens/home/widget/seting_background_button.dart';
+import 'package:foydali_nuqtalar/screens/settings/widget/seting_background_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 

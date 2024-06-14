@@ -6,6 +6,7 @@ import 'package:foydali_nuqtalar/blocs/book/book_event.dart';
 import 'package:foydali_nuqtalar/blocs/book/book_state.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/books/widget/book_button.dart';
+import 'package:foydali_nuqtalar/screens/settings/setting_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
@@ -65,7 +66,22 @@ class _BooksScreenState extends State<BooksScreen> {
               itemCount: state.bookModels.length,
               itemBuilder: (BuildContext context, int index) {
                 return BookMyButton(
-                  onTab: () {},
+                  onTab: () {
+                    if (state.bookModels[index].isFree) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SettingScreen(
+                              text: state.bookModels[index].context,
+                            );
+                          },
+                        ),
+                      );
+                    }else{
+                      //TODO No Profile or Money :)
+                    }
+                  },
                   isFirst: index == 0,
                   order: state.bookModels[index].order,
                   title: state.bookModels[index].title,
