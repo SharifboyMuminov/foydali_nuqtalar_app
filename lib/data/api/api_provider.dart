@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:foydali_nuqtalar/data/api/api_client.dart';
+import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/data/models/app_info/app_info_model.dart';
 import 'package:foydali_nuqtalar/data/models/network_response.dart';
 import 'package:foydali_nuqtalar/data/models/user/user_model.dart';
@@ -76,6 +77,18 @@ class ApiProvider extends ApiClient {
       );
 
       if (response.statusCode == 200) {
+        String fullName =
+            "${response.data['first_name'] as String? ?? ""} ${response.data['last_name'] as String? ?? ""}";
+
+        StorageRepository.setString(
+          key: "user_full_name",
+          value: fullName,
+        );
+        StorageRepository.setString(
+          key: "email",
+          value: response.data['email'] as String? ?? "",
+        );
+
         networkResponse.data = UserModel.fromJson(response.data["user"]);
       } else {
         networkResponse.errorText = "Error password or not profile :(";

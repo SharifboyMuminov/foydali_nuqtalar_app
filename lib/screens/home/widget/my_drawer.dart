@@ -18,6 +18,8 @@ class MyDrawer extends StatelessWidget {
     required this.onTabInfo,
     required this.onTabVideo,
     required this.onTabLogout,
+    this.fullName = "",
+    this.email = "",
   });
 
   final VoidCallback onTabRegister;
@@ -27,6 +29,8 @@ class MyDrawer extends StatelessWidget {
   final VoidCallback onTabInfo;
   final VoidCallback onTabVideo;
   final VoidCallback onTabLogout;
+  final String fullName;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -65,67 +69,69 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
           ),
-          GlobalMyButton(
-            margin: EdgeInsets.symmetric(horizontal: 20.we, vertical: 16.he),
-            iconPath: AppImages.profileSvg,
-            padding: EdgeInsets.symmetric(vertical: 12.he),
-            onTab: onTabRegister,
-            title: "Profilga kirish",
-            titleColor: AppColors.white,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.we),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.we,
-                  vertical: 14.he,
-                ),
-                backgroundColor: AppColors.cF07448.withOpacity(0.08),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-              ),
-              onPressed: onTabProfile,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    AppImages.profileTwoSvg,
-                    width: 32.we,
-                    height: 32.we,
+          if (fullName.isEmpty)
+            GlobalMyButton(
+              margin: EdgeInsets.symmetric(horizontal: 20.we, vertical: 16.he),
+              iconPath: AppImages.profileSvg,
+              padding: EdgeInsets.symmetric(vertical: 12.he),
+              onTab: onTabRegister,
+              title: "Profilga kirish",
+              titleColor: AppColors.white,
+            ),
+          if (fullName.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.we),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.we,
+                    vertical: 14.he,
                   ),
-                  8.getW(),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Xurshid Komilov",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyle.seoulRobotoRegular.copyWith(
-                            fontSize: 16.sp,
-                            color: AppColors.c010A27,
-                          ),
-                        ),
-                        Text(
-                          "komilov123@gmail.com",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyle.seoulRobotoRegular.copyWith(
-                            fontSize: 12.sp,
-                            color: AppColors.c010A27.withOpacity(0.4),
-                          ),
-                        ),
-                      ],
+                  backgroundColor: AppColors.cF07448.withOpacity(0.08),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
+                ),
+                onPressed: onTabProfile,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      AppImages.profileTwoSvg,
+                      width: 32.we,
+                      height: 32.we,
                     ),
-                  ),
-                ],
+                    8.getW(),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Xurshid Komilov",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyle.seoulRobotoRegular.copyWith(
+                              fontSize: 16.sp,
+                              color: AppColors.c010A27,
+                            ),
+                          ),
+                          Text(
+                            "komilov123@gmail.com",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyle.seoulRobotoRegular.copyWith(
+                              fontSize: 12.sp,
+                              color: AppColors.c010A27.withOpacity(0.4),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
           DrawerMyListTileButton(
             onTab: onTabTheme,
             title: 'Dastur rejimi',

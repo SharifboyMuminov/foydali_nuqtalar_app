@@ -21,6 +21,7 @@ class AppImages {
   static String logoutSvg = "assets/icons/logout.svg";
   static String versionSvg = "assets/icons/version.svg";
   static String systemSvg = "assets/icons/system.svg";
+  static String settingSvg = "assets/icons/setting.svg";
 
 
 //Image
