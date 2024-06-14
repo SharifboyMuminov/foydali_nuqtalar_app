@@ -6,6 +6,7 @@ import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/screens/auth/sign_up/sing_up_screen.dart';
 import 'package:foydali_nuqtalar/screens/choose_language/choose_language_screen.dart';
 import 'package:foydali_nuqtalar/screens/home/dialog/show_logout_dialog.dart';
+import 'package:foydali_nuqtalar/screens/home/widget/app_bar_button.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/my_drawer.dart';
 import 'package:foydali_nuqtalar/screens/info/info_screen.dart';
 import 'package:foydali_nuqtalar/screens/them/them_screen.dart';
@@ -45,6 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
       drawerEnableOpenDragGesture: false,
       key: _key,
       drawer: MyDrawer(
+        fullName: fullName,
+        email: email,
         onTabRegister: () {},
         onTabProfile: () {},
         onTabTheme: () {
@@ -103,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             _key.currentState!.openDrawer();
@@ -113,6 +117,11 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 24.we,
           ),
         ),
+        title: fullName.isNotEmpty
+            ? null
+            : AppBarMyButton(
+                onTab: () {},
+              ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -121,7 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 24.we,
               height: 24.we,
             ),
-          )
+          ),
+          6.getW(),
         ],
       ),
       body: Column(
