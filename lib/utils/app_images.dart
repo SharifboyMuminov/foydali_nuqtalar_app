@@ -19,6 +19,8 @@ class AppImages {
   static String infoSvg = "assets/icons/info.svg";
   static String videoSvg = "assets/icons/video.svg";
   static String logoutSvg = "assets/icons/logout.svg";
+  static String versionSvg = "assets/icons/version.svg";
+  static String systemSvg = "assets/icons/system.svg";
 
 
 //Image

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/screens/home/dialog/show_logout_dialog.dart';
 import 'package:foydali_nuqtalar/screens/home/widget/my_drawer.dart';
+import 'package:foydali_nuqtalar/screens/info/info_screen.dart';
+import 'package:foydali_nuqtalar/screens/them/them_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 
@@ -23,9 +25,31 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: MyDrawer(
         onTabRegister: () {},
         onTabProfile: () {},
-        onTabTheme: () {},
+        onTabTheme: () {
+          Navigator.pop(context);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const ThemeScreen();
+              },
+            ),
+          );
+        },
         onTabLanguage: () {},
-        onTabInfo: () {},
+        onTabInfo: () {
+          Navigator.pop(context);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const InfoScreen();
+              },
+            ),
+          );
+        },
         onTabVideo: () {},
         onTabLogout: () {
           showLogoutDialog(
