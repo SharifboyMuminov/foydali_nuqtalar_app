@@ -11,6 +11,8 @@ import 'package:foydali_nuqtalar/blocs/font_style/font_style_state.dart';
 import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
 import 'package:foydali_nuqtalar/screens/auth/sign_up/sing_up_screen.dart';
+import 'package:foydali_nuqtalar/screens/buy/buy_screen.dart';
+import 'package:foydali_nuqtalar/screens/caution/caution_screen.dart';
 import 'package:foydali_nuqtalar/screens/chapters/chapters_screen.dart';
 import 'package:foydali_nuqtalar/screens/choose_language/choose_language_screen.dart';
 import 'package:foydali_nuqtalar/screens/info/info_screen.dart';
@@ -213,7 +215,9 @@ class _SettingScreenState extends State<SettingScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return const ChaptersScreen();
+                                return ChaptersScreen(
+                                  siOldUser: fullName.isNotEmpty,
+                                );
                               },
                             ),
                           );
@@ -230,7 +234,25 @@ class _SettingScreenState extends State<SettingScreen> {
                                     ),
                                   );
                             } else {
-                              //TODO money
+                              if (fullName.isEmpty) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return const CautionScreen();
+                                    },
+                                  ),
+                                );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return const BuyScreen();
+                                    },
+                                  ),
+                                );
+                              }
                             }
                           }
                         },
