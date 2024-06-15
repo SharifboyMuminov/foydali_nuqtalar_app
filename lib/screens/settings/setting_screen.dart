@@ -56,6 +56,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("user_full_name: $fullName");
+    debugPrint("email: $email");
     return BlocBuilder<FontStyleBloc, FontStyleState>(
       builder: (BuildContext context, FontStyleState state) {
         return Scaffold(
@@ -113,6 +115,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   Navigator.pop(context);
                 },
                 onTabOk: () {
+                  StorageRepository.setString(key: "user_full_name", value: '');
+                  StorageRepository.setString(key: "email", value: '');
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                     builder: (context) {
                       return const SignUpScreen();

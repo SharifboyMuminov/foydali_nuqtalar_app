@@ -79,7 +79,7 @@ class ApiProvider extends ApiClient {
 
       if (response.statusCode == 200) {
         String fullName =
-            "${response.data['first_name'] as String? ?? ""} ${response.data['last_name'] as String? ?? ""}";
+            "${response.data["user"]['first_name'] as String? ?? ""} ${response.data["user"]['last_name'] as String? ?? ""}";
 
         StorageRepository.setString(
           key: "user_full_name",
@@ -87,7 +87,7 @@ class ApiProvider extends ApiClient {
         );
         StorageRepository.setString(
           key: "email",
-          value: response.data['email'] as String? ?? "",
+          value: response.data["user"]['email'] as String? ?? "",
         );
 
         networkResponse.data = UserModel.fromJson(response.data["user"]);

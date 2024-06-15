@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foydali_nuqtalar/screens/auth/sign_up/sing_up_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
@@ -58,7 +59,13 @@ class CautionScreen extends StatelessWidget {
             18.getH(),
             GlobalMyButton(
               margin: EdgeInsets.zero,
-              onTab: () {},
+              onTab: () {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const SignUpScreen();
+                  },
+                ), (route) => false);
+              },
               title: "Profilga kirish",
             ),
           ],
