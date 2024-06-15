@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
-import 'package:foydali_nuqtalar/screens/books/books_screen.dart';
 import 'package:foydali_nuqtalar/screens/choose_language/choose_language_screen.dart';
+import 'package:foydali_nuqtalar/screens/settings/setting_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           if (oldUser) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
               builder: (context) {
-                return const BooksScreen();
+                return const SettingScreen();
               },
             ), (route) => false);
           } else {
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
             builder: (context) {
-              return const BooksScreen();
+              return const SettingScreen();
             },
           ), (route) => false);
         }

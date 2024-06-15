@@ -21,9 +21,7 @@ import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 
 class SettingScreen extends StatefulWidget {
-  const SettingScreen({super.key, required this.text});
-
-  final String text;
+  const SettingScreen({super.key});
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -158,7 +156,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     children: [
                       Text(
                         textAlign: state.textAlign,
-                        widget.text,
+                        "sadfadsf",
                         style: state.textStyle,
                       ),
                     ],

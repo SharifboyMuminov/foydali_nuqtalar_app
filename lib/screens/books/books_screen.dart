@@ -72,13 +72,11 @@ class _BooksScreenState extends State<BooksScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return SettingScreen(
-                              text: state.bookModels[index].context,
-                            );
+                            return const SettingScreen();
                           },
                         ),
                       );
-                    }else{
+                    } else {
                       //TODO No Profile or Money :)
                     }
                   },
