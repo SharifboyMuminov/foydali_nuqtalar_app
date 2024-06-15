@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -219,33 +220,39 @@ class PaymentScreen extends StatelessWidget {
             onTab: () {},
             title: "Xaridni tekshirish",
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Yordam kerakmi?",
-                style: AppTextStyle.seoulRobotoRegular.copyWith(
-                  color: AppColors.c010A27,
-                  fontSize: 16.sp,
-                ),
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 4.we),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.r),
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  "Adminga murojaat qilish",
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.we),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Yordam kerakmi?",
                   style: AppTextStyle.seoulRobotoRegular.copyWith(
-                    color: AppColors.cF07448,
+                    color: AppColors.c010A27,
                     fontSize: 16.sp,
                   ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 4.we),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.r),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      "Adminga murojaat qilish",
+                      style: AppTextStyle.seoulRobotoRegular.copyWith(
+                        color: AppColors.cF07448,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           25.getH(),
         ],
