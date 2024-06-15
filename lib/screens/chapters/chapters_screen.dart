@@ -66,6 +66,7 @@ class ChaptersScreen extends StatelessWidget {
                   },
                   title: "Qayta urinib ko'rish",
                 ),
+
               ],
             );
           }
