@@ -6,10 +6,12 @@ class BookState extends Equatable {
   final String errorText;
   final String statusMessage;
   final String message;
+  final int activePage;
   final FromStatus fromStatus;
   final List<BookModel> bookModels;
 
   const BookState({
+    required this.activePage,
     required this.errorText,
     required this.fromStatus,
     required this.statusMessage,
@@ -21,6 +23,7 @@ class BookState extends Equatable {
     String? errorText,
     String? statusMessage,
     String? message,
+    int? activePage,
     FromStatus? fromStatus,
     List<BookModel>? bookModels,
   }) {
@@ -30,6 +33,7 @@ class BookState extends Equatable {
       statusMessage: statusMessage ?? this.statusMessage,
       message: message ?? this.message,
       bookModels: bookModels ?? this.bookModels,
+      activePage: activePage ?? this.activePage,
     );
   }
 
@@ -40,5 +44,6 @@ class BookState extends Equatable {
         statusMessage,
         message,
         bookModels,
+        activePage,
       ];
 }

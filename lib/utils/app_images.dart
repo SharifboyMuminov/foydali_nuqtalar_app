@@ -23,6 +23,10 @@ class AppImages {
   static String systemSvg = "assets/icons/system.svg";
   static String settingSvg = "assets/icons/setting.svg";
   static String alignSvg = "assets/icons/align.svg";
+  static String arrowRightSvg = "assets/icons/arrow_right.svg";
+  static String settingBottomIconSvg = "assets/icons/setting_bottom_icon.svg";
 
 //Image
+
+  static String emptyPng = "assets/images/empty.png";
 }

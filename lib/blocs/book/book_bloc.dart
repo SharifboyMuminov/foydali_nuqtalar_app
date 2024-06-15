@@ -14,9 +14,11 @@ class BookBloc extends Bloc<BookEvent, BookState> {
             statusMessage: "",
             message: "",
             bookModels: [],
+            activePage: 0,
           ),
         ) {
     on<BookFetchEvent>(_fetchBooks);
+    on<BookSetActivePageEvent>(_setActivePage);
   }
 
   final BookRepository _bookRepository;
@@ -41,5 +43,9 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         ),
       );
     }
+  }
+
+  void _setActivePage(BookSetActivePageEvent event, emit) {
+    emit(state.copyWith(activePage: event.activePage));
   }
 }

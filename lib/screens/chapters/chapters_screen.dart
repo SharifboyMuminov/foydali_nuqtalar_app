@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/blocs/book/book_bloc.dart';
 import 'package:foydali_nuqtalar/blocs/book/book_event.dart';
 import 'package:foydali_nuqtalar/blocs/book/book_state.dart';
 import 'package:foydali_nuqtalar/data/models/from_status/from_status.dart';
-import 'package:foydali_nuqtalar/screens/books/widget/book_button.dart';
-import 'package:foydali_nuqtalar/screens/settings/setting_screen.dart';
+import 'package:foydali_nuqtalar/screens/chapters/widget/book_button.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
+import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
-class BooksScreen extends StatefulWidget {
-  const BooksScreen({super.key});
+class ChaptersScreen extends StatefulWidget {
+  const ChaptersScreen({super.key});
 
   @override
-  State<BooksScreen> createState() => _BooksScreenState();
+  State<ChaptersScreen> createState() => _ChaptersScreenState();
 }
 
-class _BooksScreenState extends State<BooksScreen> {
+class _ChaptersScreenState extends State<ChaptersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +33,16 @@ class _BooksScreenState extends State<BooksScreen> {
           style: AppTextStyle.seoulRobotoRegular.copyWith(
             fontSize: 20.sp,
             color: AppColors.c010A27,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: SvgPicture.asset(
+            AppImages.arrowBackSvg,
+            width: 24.we,
+            height: 24.we,
           ),
         ),
       ),
@@ -68,14 +79,10 @@ class _BooksScreenState extends State<BooksScreen> {
                 return BookMyButton(
                   onTab: () {
                     if (state.bookModels[index].isFree) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const SettingScreen();
-                          },
-                        ),
-                      );
+                      context
+                          .read<BookBloc>()
+                          .add(BookSetActivePageEvent(activePage: index));
+                      Navigator.pop(context);
                     } else {
                       //TODO No Profile or Money :)
                     }
