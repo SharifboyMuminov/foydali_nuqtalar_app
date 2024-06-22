@@ -50,6 +50,9 @@ class AuthMyInput extends StatelessWidget {
         fontSize: 16.sp,
         color: Theme.of(context).colorScheme.secondary,
       ),
+      cursorColor: errorText != null
+          ? Theme.of(context).colorScheme.onError
+          : AppColors.cF07448,
       decoration: InputDecoration(
         contentPadding:
             EdgeInsets.symmetric(horizontal: 16.we, vertical: 18.he),
@@ -70,25 +73,29 @@ class AuthMyInput extends StatelessWidget {
         labelText: hintText,
         labelStyle: AppTextStyle.seoulRobotoRegular.copyWith(
           color: errorText != null
-              ? Colors.red
+              ? Theme.of(context).colorScheme.onError
               : Theme.of(context).colorScheme.secondary.withOpacity(0.60),
           fontSize: 16.sp,
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(
-            color: Colors.red,
+            color: Theme.of(context).colorScheme.onError,
             width: 2.we,
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(
-            color: Colors.red,
+            color: Theme.of(context).colorScheme.onError,
             width: 1.we,
           ),
         ),
         errorText: errorText,
+        errorStyle: AppTextStyle.seoulRobotoRegular.copyWith(
+          color: Theme.of(context).colorScheme.onError,
+          fontSize: 12.sp,
+        ),
         suffixIcon: isPasswordInput != null
             ? IconButton(
                 onPressed: onTabEye,

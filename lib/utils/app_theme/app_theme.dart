@@ -9,6 +9,7 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.dark(
+      onError: AppColors.cF2B8B5,
       secondary: AppColors.white,
       scrim: AppColors.white,
       primary: AppColors.white.withOpacity(0.64),
@@ -61,7 +62,8 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    colorScheme: ColorScheme.dark(
+    colorScheme: ColorScheme.light(
+      onError: AppColors.cB3261E,
       secondaryContainer: AppColors.white,
       secondary: AppColors.c010A27,
       primary: AppColors.c010A27.withOpacity(0.64),

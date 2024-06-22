@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,6 @@ import 'package:foydali_nuqtalar/data/repositories/app_info_repository.dart';
 import 'package:foydali_nuqtalar/data/repositories/auth_repository.dart';
 import 'package:foydali_nuqtalar/data/repositories/book_repository.dart';
 import 'package:foydali_nuqtalar/screens/splash/splash_screen.dart';
-import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_theme/app_theme.dart';
 
 class App extends StatelessWidget {
@@ -53,11 +53,17 @@ class App extends StatelessWidget {
           designSize: const Size(393, 852),
           builder: (context, child) {
             ScreenUtil.init(context);
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme.darkTheme,
-              //darkTheme: AppTheme.darkTheme,
-              home: child,
+            return AdaptiveTheme(
+              light: AppTheme.lightTheme,
+              dark: AppTheme.darkTheme,
+              initial: AdaptiveThemeMode.system,
+              builder: (ThemeData light, ThemeData dark) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: light,
+                  home: child,
+                );
+              },
             );
           },
           child: const SplashScreen(),

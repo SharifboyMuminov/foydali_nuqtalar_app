@@ -12,15 +12,21 @@ myShowDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog.adaptive(
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         title: Text(
           title,
           style: AppTextStyle.seoulRobotoRegular.copyWith(
-            color: AppColors.c010A27,
+            color: Theme.of(context).colorScheme.secondary,
             fontSize: 15.sp,
           ),
         ),
         actions: [
           TextButton(
+            style: TextButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4.r),
+              ),
+            ),
             onPressed: onTab,
             child: Text(
               "Ok",

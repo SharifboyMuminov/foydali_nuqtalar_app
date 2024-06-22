@@ -1,12 +1,10 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foydali_nuqtalar/data/local/storage_repository.dart';
 import 'package:foydali_nuqtalar/screens/them/widget/theme_list_tile.dart';
-import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
-import 'package:foydali_nuqtalar/utils/app_text_style.dart';
 
 class ThemeScreen extends StatefulWidget {
   const ThemeScreen({super.key});
@@ -18,6 +16,7 @@ class ThemeScreen extends StatefulWidget {
 class _ThemeScreenState extends State<ThemeScreen> {
   late bool isTheme;
   late bool autoTheme;
+  late bool isLight;
 
   @override
   void initState() {
@@ -56,6 +55,12 @@ class _ThemeScreenState extends State<ThemeScreen> {
             onTab: () {
               if (!autoTheme) {
                 isTheme = !isTheme;
+                if (isTheme) {
+                  AdaptiveTheme.of(context).setDark();
+                } else {
+                  AdaptiveTheme.of(context).setLight();
+                }
+
                 setState(() {});
                 StorageRepository.setBool(key: "theme", value: isTheme);
               }
