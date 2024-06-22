@@ -33,99 +33,90 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.c252525,
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.light,
-        statusBarColor: AppColors.c252525,
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.white,
-          centerTitle: true,
-          title: Text(
-            "Tilni tanlang",
-            style: AppTextStyle.seoulRobotoRegular.copyWith(
-              fontSize: 20.sp,
-              color: AppColors.c010A27,
-            ),
-          ),
-          leading: widget.isSetLanguage
-              ? IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: SvgPicture.asset(
-                    AppImages.arrowBackSvg,
-                    width: 24.we,
-                    height: 24.we,
-                  ),
-                )
-              : null,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "Tilni tanlang",
         ),
-        body: Column(
-          children: [
-            LanguageMyButton(
-              onTab: () {
-                activeIndex = 0;
-                StorageRepository.setInt(key: "active_language", value: 0);
-
-                setState(() {});
-              },
-              title: 'O‘zbek tili',
-              iconPath: AppImages.uzbFlagSvg,
-              active: activeIndex == 0,
-            ),
-            LanguageMyButton(
-              onTab: () {
-                activeIndex = 1;
-                StorageRepository.setInt(key: "active_language", value: 1);
-
-                setState(() {});
-              },
-              title: 'Русский',
-              iconPath: AppImages.russiaFlagSvg,
-              active: activeIndex == 1,
-            ),
-            LanguageMyButton(
-              onTab: () {
-                activeIndex = 2;
-                StorageRepository.setInt(key: "active_language", value: 2);
-
-                setState(() {});
-              },
-              title: 'English',
-              iconPath: AppImages.americaFlagSvg,
-              active: activeIndex == 2,
-            ),
-            LanguageMyButton(
-              onTab: () {
-                activeIndex = 3;
-                StorageRepository.setInt(key: "active_language", value: 3);
-                setState(() {});
-              },
-              title: 'Français',
-              iconPath: AppImages.franceFlagSvg,
-              active: activeIndex == 3,
-            ),
-            const Spacer(),
-            if (!widget.isSetLanguage)
-              GlobalMyButton(
-                onTab: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const InstructionVideoScreen();
-                      },
-                    ),
-                  );
+        leading: widget.isSetLanguage
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
                 },
-                title: 'Davom etish',
-              ),
-          ],
-        ),
+                icon: SvgPicture.asset(
+                  AppImages.arrowBackSvg,
+                  width: 24.we,
+                  height: 24.we,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              )
+            : null,
+      ),
+      body: Column(
+        children: [
+          LanguageMyButton(
+            onTab: () {
+              activeIndex = 0;
+              StorageRepository.setInt(key: "active_language", value: 0);
+
+              setState(() {});
+            },
+            title: 'O‘zbek tili',
+            iconPath: AppImages.uzbFlagSvg,
+            active: activeIndex == 0,
+          ),
+          LanguageMyButton(
+            onTab: () {
+              activeIndex = 1;
+              StorageRepository.setInt(key: "active_language", value: 1);
+
+              setState(() {});
+            },
+            title: 'Русский',
+            iconPath: AppImages.russiaFlagSvg,
+            active: activeIndex == 1,
+          ),
+          LanguageMyButton(
+            onTab: () {
+              activeIndex = 2;
+              StorageRepository.setInt(key: "active_language", value: 2);
+
+              setState(() {});
+            },
+            title: 'English',
+            iconPath: AppImages.americaFlagSvg,
+            active: activeIndex == 2,
+          ),
+          LanguageMyButton(
+            onTab: () {
+              activeIndex = 3;
+              StorageRepository.setInt(key: "active_language", value: 3);
+              setState(() {});
+            },
+            title: 'Français',
+            iconPath: AppImages.franceFlagSvg,
+            active: activeIndex == 3,
+          ),
+          const Spacer(),
+          if (!widget.isSetLanguage)
+            GlobalMyButton(
+              onTab: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const InstructionVideoScreen();
+                    },
+                  ),
+                );
+              },
+              title: 'Davom etish',
+            ),
+        ],
       ),
     );
   }

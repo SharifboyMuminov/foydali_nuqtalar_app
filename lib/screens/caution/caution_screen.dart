@@ -15,7 +15,6 @@ class CautionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -24,6 +23,10 @@ class CautionScreen extends StatelessWidget {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         shape: Border(
@@ -43,7 +46,7 @@ class CautionScreen extends StatelessWidget {
               "To’liq kitobni o‘qish uchun profilga kirishingiz va to'lov qilishingiz kerak",
               textAlign: TextAlign.center,
               style: AppTextStyle.seoulRobotoSemiBold.copyWith(
-                color: AppColors.c010A27,
+                color: Theme.of(context).colorScheme.secondary,
                 fontSize: 20.sp,
               ),
             ),
@@ -52,7 +55,7 @@ class CautionScreen extends StatelessWidget {
               "Hozirda siz kitobning dastlabki 3 bobini bepul o'qishingiz mumkin.",
               textAlign: TextAlign.center,
               style: AppTextStyle.seoulRobotoRegular.copyWith(
-                color: AppColors.c010A27,
+                color: Theme.of(context).colorScheme.secondary,
                 fontSize: 14.sp,
               ),
             ),

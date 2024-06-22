@@ -24,14 +24,9 @@ class ChaptersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.white,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Dastur haqida",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            fontSize: 20.sp,
-            color: AppColors.c010A27,
-          ),
         ),
         leading: IconButton(
           onPressed: () {
@@ -41,6 +36,10 @@ class ChaptersScreen extends StatelessWidget {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
@@ -66,7 +65,6 @@ class ChaptersScreen extends StatelessWidget {
                   },
                   title: "Qayta urinib ko'rish",
                 ),
-
               ],
             );
           }
@@ -108,6 +106,7 @@ class ChaptersScreen extends StatelessWidget {
                   order: state.bookModels[index].order,
                   title: state.bookModels[index].title,
                   isFree: state.bookModels[index].isFree,
+                  active: state.activePage == index,
                 );
               },
             );

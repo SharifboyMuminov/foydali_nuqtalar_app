@@ -55,7 +55,7 @@ class App extends StatelessWidget {
             ScreenUtil.init(context);
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: AppTheme.darkTheme,
+              theme: AppTheme.lightTheme,
               //darkTheme: AppTheme.darkTheme,
               home: child,
             );

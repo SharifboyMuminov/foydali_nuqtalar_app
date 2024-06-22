@@ -45,13 +45,15 @@ class SettingBottomItem extends StatelessWidget {
         title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style:Theme.of(context).textTheme.bodySmall,
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
       ),
       subtitle: Text(
         subTitle,
         style: AppTextStyle.seoulRobotoRegular.copyWith(
           fontSize: 16.sp,
-          color: AppColors.c010A27.withOpacity(0.6),
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       trailing: IconButton(
@@ -60,6 +62,10 @@ class SettingBottomItem extends StatelessWidget {
           AppImages.arrowRightSvg,
           width: 24.we,
           height: 24.we,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.secondary,
+            BlendMode.srcIn,
+          ),
         ),
       ),
     );

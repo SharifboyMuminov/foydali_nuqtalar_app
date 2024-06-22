@@ -47,10 +47,9 @@ class _InstructionVideoScreenState extends State<InstructionVideoScreen> {
                 padding: EdgeInsets.only(top: 60.he),
                 child: Text(
                   "Video qo’llanma",
-                  style: AppTextStyle.seoulRobotoRegular.copyWith(
-                    color: AppColors.c010A27,
-                    fontSize: 20.sp,
-                  ),
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontSize: 20.sp,
+                      ),
                 ),
               ),
             ),

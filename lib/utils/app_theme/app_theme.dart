@@ -12,6 +12,7 @@ class AppTheme {
       secondary: AppColors.white,
       scrim: AppColors.white,
       primary: AppColors.white.withOpacity(0.64),
+      tertiary: AppColors.white.withOpacity(0.06),
       brightness: Brightness.dark,
     ),
     brightness: Brightness.dark,
@@ -50,6 +51,10 @@ class AppTheme {
         fontSize: 16.sp,
         color: AppColors.white.withOpacity(0.4),
       ),
+      headlineLarge: AppTextStyle.seoulRobotoRegular.copyWith(
+        color: AppColors.white,
+        fontSize: 16.sp,
+      ),
     ),
   );
 
@@ -57,9 +62,10 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.dark(
       secondary: AppColors.c010A27,
-      primary: AppColors.white.withOpacity(0.64),
+      primary: AppColors.c010A27.withOpacity(0.64),
       brightness: Brightness.light,
       scrim: AppColors.cF07448,
+      tertiary: AppColors.c010A27.withOpacity(0.04),
     ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.white,
@@ -86,7 +92,19 @@ class AppTheme {
         fontSize: 18.sp,
       ),
       bodySmall: AppTextStyle.seoulRobotoSemiBold.copyWith(
-        color: AppColors.white,
+        color: AppColors.c010A27,
+        fontSize: 16.sp,
+      ),
+      headlineMedium: AppTextStyle.seoulPollerOneRegular.copyWith(
+        fontSize: 32.sp,
+        color: AppColors.c010A27,
+      ),
+      headlineSmall: AppTextStyle.seoulRobotoRegular.copyWith(
+        fontSize: 16.sp,
+        color: AppColors.c010A27.withOpacity(0.4),
+      ),
+      headlineLarge: AppTextStyle.seoulRobotoRegular.copyWith(
+        color: AppColors.c010A27,
         fontSize: 16.sp,
       ),
     ),

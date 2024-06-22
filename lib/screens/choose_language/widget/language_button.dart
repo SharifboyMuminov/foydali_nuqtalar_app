@@ -56,14 +56,10 @@ class LanguageMyButton extends StatelessWidget {
             Expanded(
               child: AnimatedDefaultTextStyle(
                 style: active
-                    ? AppTextStyle.seoulRobotoSemiBold.copyWith(
-                        fontSize: 16.sp,
-                        color: AppColors.c010A27,
-                      )
-                    : AppTextStyle.seoulRobotoRegular.copyWith(
-                        fontSize: 16.sp,
-                        color: AppColors.c010A27,
-                      ),
+                    ? Theme.of(context).textTheme.headlineLarge!.copyWith(
+                          fontWeight: FontWeight.w700,
+                        )
+                    : Theme.of(context).textTheme.headlineLarge!,
                 duration: const Duration(milliseconds: 300),
                 child: Text(
                   title,

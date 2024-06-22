@@ -12,6 +12,7 @@ class BookMyButton extends StatelessWidget {
     required this.title,
     required this.order,
     required this.isFree,
+    required this.active,
   });
 
   final VoidCallback onTab;
@@ -19,6 +20,7 @@ class BookMyButton extends StatelessWidget {
   final String title;
   final int order;
   final bool isFree;
+  final bool active;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class BookMyButton extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: !isFree
-              ? AppColors.c010A27.withOpacity(0.04)
+              ? Theme.of(context).colorScheme.tertiary
               : AppColors.cF07448.withOpacity(0.08),
         ),
         child: Text(
@@ -60,7 +62,7 @@ class BookMyButton extends StatelessWidget {
           style: AppTextStyle.seoulRobotoRegular.copyWith(
             fontSize: 16.sp,
             color: !isFree
-                ? AppColors.c010A27.withOpacity(0.4)
+                ? Theme.of(context).colorScheme.secondary.withOpacity(0.40)
                 : AppColors.cF07448,
           ),
         ),
@@ -71,9 +73,11 @@ class BookMyButton extends StatelessWidget {
           title,
           style: AppTextStyle.seoulRobotoMedium.copyWith(
             fontSize: 16.sp,
-            color: !isFree
-                ? AppColors.c010A27.withOpacity(0.4)
-                : AppColors.cF07448,
+            color: active
+                ? AppColors.cF07448
+                : !isFree
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.40)
+                    : Theme.of(context).colorScheme.secondary,
           ),
         ),
       ),
