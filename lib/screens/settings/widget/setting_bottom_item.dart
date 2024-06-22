@@ -45,10 +45,7 @@ class SettingBottomItem extends StatelessWidget {
         title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: AppTextStyle.seoulRobotoBold.copyWith(
-          color: AppColors.c010A27,
-          fontSize: 16.sp,
-        ),
+        style:Theme.of(context).textTheme.bodySmall,
       ),
       subtitle: Text(
         subTitle,

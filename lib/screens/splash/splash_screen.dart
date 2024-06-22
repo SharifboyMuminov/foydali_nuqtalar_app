@@ -69,25 +69,16 @@ class _SplashScreenState extends State<SplashScreen> {
             20.getH(),
             Text(
               "Foydali".toUpperCase(),
-              style: AppTextStyle.seoulPollerOneBold.copyWith(
-                color: AppColors.c010A27,
-                fontSize: 32.sp,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
               "nuqtalar".toUpperCase(),
-              style: AppTextStyle.seoulPollerOneBold.copyWith(
-                color: AppColors.c010A27,
-                fontSize: 32.sp,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             10.getH(),
             Text(
               "Shuxrat Xo‘ja",
-              style: AppTextStyle.seoulRobotoRegular.copyWith(
-                fontSize: 16.sp,
-                color: AppColors.c000645.withOpacity(0.40),
-              ),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),

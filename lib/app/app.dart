@@ -13,6 +13,7 @@ import 'package:foydali_nuqtalar/data/repositories/auth_repository.dart';
 import 'package:foydali_nuqtalar/data/repositories/book_repository.dart';
 import 'package:foydali_nuqtalar/screens/splash/splash_screen.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
+import 'package:foydali_nuqtalar/utils/app_theme/app_theme.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -54,10 +55,8 @@ class App extends StatelessWidget {
             ScreenUtil.init(context);
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                useMaterial3: true,
-                scaffoldBackgroundColor: AppColors.white,
-              ),
+              theme: AppTheme.darkTheme,
+              //darkTheme: AppTheme.darkTheme,
               home: child,
             );
           },

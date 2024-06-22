@@ -56,12 +56,11 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("user_full_name: $fullName");
-    debugPrint("email: $email");
+    // debugPrint("user_full_name: $fullName");
+    // debugPrint("email: $email");
     return BlocBuilder<FontStyleBloc, FontStyleState>(
       builder: (BuildContext context, FontStyleState state) {
         return Scaffold(
-          backgroundColor: state.backgroundColor,
           drawerEnableOpenDragGesture: false,
           key: _key,
           drawer: MyDrawer(
@@ -127,7 +126,6 @@ class _SettingScreenState extends State<SettingScreen> {
             },
           ),
           appBar: AppBar(
-            backgroundColor: state.backgroundColor,
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
@@ -137,6 +135,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 AppImages.drawerSvg,
                 width: 24.we,
                 height: 24.we,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.secondary,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
             title: fullName.isNotEmpty
@@ -154,6 +156,10 @@ class _SettingScreenState extends State<SettingScreen> {
                   AppImages.settingSvg,
                   width: 24.we,
                   height: 24.we,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
               6.getW(),
@@ -206,7 +212,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               textAlign: state.textAlign,
                               bookState
                                   .bookModels[bookState.activePage].context,
-                              style: state.textStyle,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
                         ),
