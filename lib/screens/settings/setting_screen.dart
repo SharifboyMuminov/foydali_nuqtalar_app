@@ -170,8 +170,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           children: [
                             Text(
                               textAlign: state.textAlign,
-                              bookState
-                                  .bookModels[bookState.activePage].context,
+                              bookState.bookModels[bookState.activePage].content
+                                  .replaceAll("<p>", ""),
                               style: state.textStyle.copyWith(
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
