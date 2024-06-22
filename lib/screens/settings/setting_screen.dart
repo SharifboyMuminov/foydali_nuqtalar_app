@@ -27,7 +27,6 @@ import 'package:foydali_nuqtalar/screens/settings/widget/setting_bottom_item.dar
 import 'package:foydali_nuqtalar/screens/settings/widget/slider_text_size.dart';
 import 'package:foydali_nuqtalar/screens/them/them_screen.dart';
 import 'package:foydali_nuqtalar/screens/widget/global_button.dart';
-import 'package:foydali_nuqtalar/utils/app_colors.dart';
 import 'package:foydali_nuqtalar/utils/app_images.dart';
 import 'package:foydali_nuqtalar/utils/app_size.dart';
 import 'package:foydali_nuqtalar/utils/app_text_style.dart';
@@ -137,7 +136,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       bookState.errorText,
                       style: AppTextStyle.seoulRobotoRegular.copyWith(
                         fontSize: 20.sp,
-                        color: AppColors.c010A27,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                     GlobalMyButton(
@@ -173,7 +172,9 @@ class _SettingScreenState extends State<SettingScreen> {
                               textAlign: state.textAlign,
                               bookState
                                   .bookModels[bookState.activePage].context,
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: state.textStyle.copyWith(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
                             ),
                           ],
                         ),
