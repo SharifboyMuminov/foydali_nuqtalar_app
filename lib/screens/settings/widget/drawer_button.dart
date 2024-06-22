@@ -28,7 +28,7 @@ class DrawerMyListTileButton extends StatelessWidget {
         trailingTitle ?? "",
         style: AppTextStyle.seoulRobotoRegular.copyWith(
           fontSize: 16.sp,
-          color: AppColors.c010A27.withOpacity(0.4),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
         ),
       ),
       shape: Border(
@@ -46,11 +46,17 @@ class DrawerMyListTileButton extends StatelessWidget {
         iconPath,
         width: 24.we,
         height: 24.we,
+        colorFilter: !(iconPath.contains("uzb") || iconPath.contains("logout"))
+            ? ColorFilter.mode(
+                Theme.of(context).colorScheme.secondary,
+                BlendMode.srcIn,
+              )
+            : null,
       ),
       title: Text(
         title,
         style: AppTextStyle.seoulRobotoMedium.copyWith(
-          color: titleColor ?? AppColors.c010A27,
+          color: titleColor ?? Theme.of(context).colorScheme.secondary,
           fontSize: 16.sp,
         ),
       ),

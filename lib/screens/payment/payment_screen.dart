@@ -16,14 +16,9 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.white,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "To‘lov usulini tanlang",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            fontSize: 20.sp,
-            color: AppColors.c010A27,
-          ),
         ),
         leading: IconButton(
           onPressed: () {
@@ -33,11 +28,15 @@ class PaymentScreen extends StatelessWidget {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         shape: Border(
           bottom: BorderSide(
-            color: AppColors.c010A27.withOpacity(0.08),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.08),
             width: 1.we,
           ),
         ),
@@ -60,7 +59,7 @@ class PaymentScreen extends StatelessWidget {
                     "Pul o‘tkazmasi orqali",
                     style: AppTextStyle.seoulRobotoBold.copyWith(
                       fontSize: 18.sp,
-                      color: AppColors.c010A27,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   10.getH(),
@@ -68,7 +67,7 @@ class PaymentScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         horizontal: 16.we, vertical: 16.he),
                     decoration: BoxDecoration(
-                      color: AppColors.c010A27.withOpacity(0.04),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.04),
                       borderRadius: BorderRadius.circular(4.r),
                     ),
                     child: Row(
@@ -82,14 +81,14 @@ class PaymentScreen extends StatelessWidget {
                               "8600 1234 5678 9101",
                               style: AppTextStyle.seoulRobotoRegular.copyWith(
                                 fontSize: 16.sp,
-                                color: AppColors.c010A27,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                             ),
                             Text(
                               "Shuxrat Xo‘ja",
                               style: AppTextStyle.seoulRobotoRegular.copyWith(
                                 fontSize: 14.sp,
-                                color: AppColors.c010A27.withOpacity(0.4),
+                                color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
                               ),
                             ),
                           ],
@@ -100,6 +99,10 @@ class PaymentScreen extends StatelessWidget {
                             AppImages.copySvg,
                             width: 24.we,
                             height: 24.we,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).colorScheme.secondary,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
                       ],
@@ -129,7 +132,7 @@ class PaymentScreen extends StatelessWidget {
                       Expanded(
                         child: Container(
                           height: 1.he,
-                          color: AppColors.c010A27.withOpacity(0.08),
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.08),
                         ),
                       ),
                       20.getW(),
@@ -137,14 +140,14 @@ class PaymentScreen extends StatelessWidget {
                         "Yoki",
                         style: AppTextStyle.seoulRobotoRegular.copyWith(
                           fontSize: 16.sp,
-                          color: AppColors.c010A27.withOpacity(0.4),
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
                         ),
                       ),
                       20.getW(),
                       Expanded(
                         child: Container(
                           height: 1.he,
-                          color: AppColors.c010A27.withOpacity(0.08),
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.08),
                         ),
                       ),
                     ],
@@ -154,7 +157,7 @@ class PaymentScreen extends StatelessWidget {
                     "Karta ma’lumotlarini kiritish orqali",
                     style: AppTextStyle.seoulRobotoBold.copyWith(
                       fontSize: 18.sp,
-                      color: AppColors.c010A27,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   10.getH(),
@@ -164,7 +167,7 @@ class PaymentScreen extends StatelessWidget {
                         horizontal: 10.we,
                         vertical: 16.he,
                       ),
-                      backgroundColor: AppColors.c010A27.withOpacity(0.04),
+                      backgroundColor: Theme.of(context).colorScheme.secondary.withOpacity(0.04),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4.r),
                       ),
@@ -201,7 +204,7 @@ class PaymentScreen extends StatelessWidget {
                           "To’lov qilish",
                           style: AppTextStyle.seoulRobotoSemiBold.copyWith(
                             fontSize: 16.sp,
-                            color: AppColors.c010A27,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                       ],

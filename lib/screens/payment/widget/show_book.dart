@@ -18,7 +18,7 @@ class ShowBook extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.r),
             border: Border.all(
-              color: AppColors.c010A27.withOpacity(0.04),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.04),
               width: 1.we,
             ),
             image: DecorationImage(
@@ -38,14 +38,14 @@ class ShowBook extends StatelessWidget {
               "Kitob narxi",
               style: AppTextStyle.seoulRobotoRegular.copyWith(
                 fontSize: 16.sp,
-                color: AppColors.c010A27.withOpacity(0.4),
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
               ),
             ),
             Text(
               "100 000 so‘m",
               style: AppTextStyle.seoulRobotoBold.copyWith(
                 fontSize: 18.sp,
-                color: AppColors.c010A27,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ],

@@ -28,7 +28,7 @@ class ThemeMyListTileButton extends StatelessWidget {
       shape: Border(
         bottom: BorderSide(
           width: 1.we,
-          color: AppColors.c010A27.withOpacity(0.08),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.08),
         ),
       ),
       contentPadding: EdgeInsets.symmetric(
@@ -40,16 +40,20 @@ class ThemeMyListTileButton extends StatelessWidget {
         leadingIconPath,
         width: 24.we,
         height: 24.we,
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.secondary,
+          BlendMode.srcIn,
+        ),
       ),
       title: Text(
         title,
         style: AppTextStyle.seoulRobotoMedium.copyWith(
-          color: AppColors.c010A27,
+          color: Theme.of(context).colorScheme.secondary,
           fontSize: 16.sp,
         ),
       ),
       trailing: CupertinoSwitch(
-        trackColor: AppColors.c010A27.withOpacity(0.4),
+        trackColor: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
         value: value,
         onChanged: onChanged,
       ),

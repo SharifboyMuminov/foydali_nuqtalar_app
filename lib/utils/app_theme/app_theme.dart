@@ -13,6 +13,7 @@ class AppTheme {
       scrim: AppColors.white,
       primary: AppColors.white.withOpacity(0.64),
       tertiary: AppColors.white.withOpacity(0.06),
+      secondaryContainer: AppColors.c1F2741,
       brightness: Brightness.dark,
     ),
     brightness: Brightness.dark,
@@ -61,6 +62,7 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.dark(
+      secondaryContainer: AppColors.white,
       secondary: AppColors.c010A27,
       primary: AppColors.c010A27.withOpacity(0.64),
       brightness: Brightness.light,

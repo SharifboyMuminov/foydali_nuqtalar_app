@@ -16,7 +16,6 @@ class BuyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -25,11 +24,15 @@ class BuyScreen extends StatelessWidget {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         shape: Border(
           bottom: BorderSide(
-            color: AppColors.c010A27.withOpacity(0.08),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.08),
             width: 1.we,
           ),
         ),
@@ -45,7 +48,7 @@ class BuyScreen extends StatelessWidget {
                     "To’liq kitobni o‘qish uchun xarid qilishingiz kerak",
                     textAlign: TextAlign.center,
                     style: AppTextStyle.seoulRobotoSemiBold.copyWith(
-                      color: AppColors.c010A27,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontSize: 20.sp,
                     ),
                   ),
@@ -54,7 +57,7 @@ class BuyScreen extends StatelessWidget {
                     "Hozirda siz kitobning dastlabki 3 bobini bepul o'qishingiz mumkin.",
                     textAlign: TextAlign.center,
                     style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      color: AppColors.c010A27,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontSize: 14.sp,
                     ),
                   ),
@@ -68,7 +71,7 @@ class BuyScreen extends StatelessWidget {
                     "Kitob narxi",
                     style: AppTextStyle.seoulRobotoRegular.copyWith(
                       fontSize: 16.sp,
-                      color: AppColors.c010A27.withOpacity(0.4),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
                     ),
                   ),
                   Text(

@@ -31,14 +31,9 @@ class _ThemeScreenState extends State<ThemeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.white,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Dastur rejimi",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            fontSize: 20.sp,
-            color: AppColors.c010A27,
-          ),
         ),
         leading: IconButton(
           onPressed: () {
@@ -48,6 +43,10 @@ class _ThemeScreenState extends State<ThemeScreen> {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),

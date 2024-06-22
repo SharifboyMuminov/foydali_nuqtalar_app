@@ -19,14 +19,9 @@ class InfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.white,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Dastur haqida",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            fontSize: 20.sp,
-            color: AppColors.c010A27,
-          ),
         ),
         leading: IconButton(
           onPressed: () {
@@ -36,6 +31,10 @@ class InfoScreen extends StatelessWidget {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
@@ -83,7 +82,7 @@ class InfoScreen extends StatelessWidget {
                     text,
                     style: AppTextStyle.seoulRobotoRegular.copyWith(
                       fontSize: 18.sp,
-                      color: AppColors.c010A27,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   25.getH(),
@@ -91,6 +90,10 @@ class InfoScreen extends StatelessWidget {
                     AppImages.versionSvg,
                     width: 61.we,
                     height: 18.he,
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.secondary,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ],
               ),

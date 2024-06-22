@@ -24,15 +24,16 @@ showLogoutDialog(
               vertical: 20.he,
             ),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.r),
-                color: AppColors.white),
+              borderRadius: BorderRadius.circular(4.r),
+              color: Theme.of(context).colorScheme.secondaryContainer,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   "Tizimdan chiqmoqchimisiz?",
                   style: AppTextStyle.seoulRobotoSemiBold.copyWith(
-                    color: AppColors.c010A27,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontSize: 20.sp,
                   ),
                 ),
@@ -41,8 +42,11 @@ showLogoutDialog(
                   children: [
                     Expanded(
                       child: GlobalMyButton(
-                        backgroundColor: AppColors.c010A27.withOpacity(0.08),
-                        titleColor: AppColors.c010A27,
+                        backgroundColor: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.10),
+                        titleColor: Theme.of(context).colorScheme.secondary,
                         margin: EdgeInsets.zero,
                         onTab: onTanExit,
                         title: "Bekor qilish",
