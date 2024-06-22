@@ -37,12 +37,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Parolni tiklash",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            color: AppColors.c010A27,
-            fontSize: 20.sp,
-          ),
+
         ),
         leading: IconButton(
           onPressed: () {
@@ -52,6 +49,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
@@ -69,9 +70,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         "Elektron pochtangizni kiriting va biz unga parolni tiklash uchun kod yuboramiz",
                         textAlign: TextAlign.center,
                         style: AppTextStyle.seoulRobotoRegular.copyWith(
-                          color: AppColors.c010A27.withOpacity(0.40),
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.40),
                           fontSize: 16.sp,
                         ),
+
                       ),
                       20.getH(),
                       AuthMyInput(

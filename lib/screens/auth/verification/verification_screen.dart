@@ -43,12 +43,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Kodni kiriting",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            color: AppColors.c010A27,
-            fontSize: 20.sp,
-          ),
         ),
         leading: IconButton(
           onPressed: () {
@@ -58,6 +54,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
             AppImages.arrowBackSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
@@ -75,7 +75,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         "Elektron pochtangizni tasdiqlash uchun biz unga kod yubordik",
                         textAlign: TextAlign.center,
                         style: AppTextStyle.seoulRobotoRegular.copyWith(
-                          color: AppColors.c010A27.withOpacity(0.40),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.40),
                           fontSize: 16.sp,
                         ),
                       ),
@@ -89,8 +92,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
               ),
               GlobalMyButton(
-                backgroundColor:
-                    _pinController.text.length == 6 ? null : Colors.grey,
+                backgroundColor: _pinController.text.length == 6
+                    ? null
+                    : Theme.of(context).colorScheme.secondary.withOpacity(0.4),
                 loading: state.fromStatus == FromStatus.loading,
                 onTab: _pinController.text.length == 6
                     ? () {

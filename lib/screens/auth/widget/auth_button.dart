@@ -11,11 +11,13 @@ class AuthMyButton extends StatelessWidget {
     required this.onTab,
     required this.title,
     required this.iconPathSvg,
+    this.colorFilter,
   });
 
   final VoidCallback onTab;
   final String title;
   final String iconPathSvg;
+  final ColorFilter? colorFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class AuthMyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.r),
         ),
         side:
-            BorderSide(color: AppColors.c010A27.withOpacity(0.40), width: 1.we),
+            BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(0.40), width: 1.we),
         padding: EdgeInsets.symmetric(
           vertical: 17.he,
         ),
@@ -38,12 +40,13 @@ class AuthMyButton extends StatelessWidget {
             iconPathSvg,
             width: 24.we,
             height: 24.we,
+            colorFilter: colorFilter,
           ),
           8.getW(),
           Text(
             title,
             style: AppTextStyle.seoulRobotoSemiBold.copyWith(
-              color: AppColors.c010A27,
+              color: Theme.of(context).colorScheme.secondary,
               fontSize: 16.sp,
             ),
           ),

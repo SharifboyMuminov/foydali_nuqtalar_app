@@ -18,14 +18,14 @@ class PasswordMyInput extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 4.we),
       width: 36.we,
       height: 58.he,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontSize: 20,
-        color: Colors.black,
+        color: Theme.of(context).colorScheme.secondary,
         fontWeight: FontWeight.w600,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.4)),
       ),
     );
 

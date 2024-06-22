@@ -49,12 +49,8 @@ class _ResetPasswordConfirmScreenState
           child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: Text(
+              title: const Text(
                 "Yangi parol",
-                style: AppTextStyle.seoulRobotoRegular.copyWith(
-                  color: AppColors.c010A27,
-                  fontSize: 20.sp,
-                ),
               ),
               leading: IconButton(
                 onPressed: () {
@@ -66,6 +62,10 @@ class _ResetPasswordConfirmScreenState
                   AppImages.arrowBackSvg,
                   width: 24.we,
                   height: 24.we,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),
@@ -113,7 +113,12 @@ class _ResetPasswordConfirmScreenState
                 ),
                 GlobalMyButton(
                   loading: state.fromStatus == FromStatus.loading,
-                  backgroundColor: _checkInput ? null : Colors.grey,
+                  backgroundColor: _checkInput
+                      ? null
+                      : Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(0.4),
                   onTab: state.fromStatus == FromStatus.loading
                       ? null
                       : _checkInput

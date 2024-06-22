@@ -49,12 +49,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Ro‘yxatdan o‘tish",
-          style: AppTextStyle.seoulRobotoRegular.copyWith(
-            color: AppColors.c010A27,
-            fontSize: 20.sp,
-          ),
         ),
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
@@ -77,12 +73,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onTab: () {},
                         title: "Apple orqali kirish",
                         iconPathSvg: AppImages.appleLogoSvg,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.secondary,
+                          BlendMode.srcIn,
+                        ),
                       ),
                       20.getH(),
                       Text(
                         "Yoki",
                         style: AppTextStyle.seoulRobotoRegular.copyWith(
-                          color: AppColors.c010A27.withOpacity(0.40),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.40),
                           fontSize: 16.sp,
                         ),
                       ),
@@ -116,7 +119,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       20.getH(),
                       GlobalMyButton(
                         loading: state.fromStatus == FromStatus.loading,
-                        backgroundColor: _validationInput ? null : Colors.grey,
+                        backgroundColor: _validationInput
+                            ? null
+                            : Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.4),
                         margin: EdgeInsets.zero,
                         onTab: state.fromStatus == FromStatus.loading
                             ? null
@@ -140,7 +148,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Text(
                             "Profilngiz bormi?",
                             style: AppTextStyle.seoulRobotoRegular.copyWith(
-                              color: AppColors.c010A27,
+                              color: Theme.of(context).colorScheme.secondary,
                               fontSize: 16.sp,
                             ),
                           ),
@@ -185,8 +193,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textAlign: TextAlign.center,
                   "Ro'yxatdan o'tayotib, shaxsiy ma'lumotlarni qayta ishlash va ilovadan foydalanish shartlarini qabul qilasiz.",
                   style: AppTextStyle.seoulRobotoRegular.copyWith(
-                      color: AppColors.c010A27.withOpacity(0.40),
-                      fontSize: 14.sp),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withOpacity(0.40),
+                    fontSize: 14.sp,
+                  ),
                 ),
               ),
             ],

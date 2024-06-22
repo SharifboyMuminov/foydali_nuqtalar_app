@@ -48,6 +48,7 @@ class AuthMyInput extends StatelessWidget {
       keyboardType: textInputType ?? TextInputType.text,
       style: AppTextStyle.seoulRobotoSemiBold.copyWith(
         fontSize: 16.sp,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       decoration: InputDecoration(
         contentPadding:
@@ -62,7 +63,7 @@ class AuthMyInput extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(
-            color: AppColors.c010A27.withOpacity(0.40),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.40),
             width: 1.we,
           ),
         ),
@@ -70,7 +71,7 @@ class AuthMyInput extends StatelessWidget {
         labelStyle: AppTextStyle.seoulRobotoRegular.copyWith(
           color: errorText != null
               ? Colors.red
-              : AppColors.c010A27.withOpacity(0.60),
+              : Theme.of(context).colorScheme.secondary.withOpacity(0.60),
           fontSize: 16.sp,
         ),
         focusedErrorBorder: OutlineInputBorder(
@@ -97,6 +98,10 @@ class AuthMyInput extends StatelessWidget {
                       : AppImages.closeEyeSvg,
                   width: 24.we,
                   height: 24.we,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+                    BlendMode.srcIn,
+                  ),
                 ),
               )
             : null,

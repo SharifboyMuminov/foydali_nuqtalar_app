@@ -105,7 +105,12 @@ class _LoginInScreenState extends State<LoginInScreen> {
                       20.getH(),
                       GlobalMyButton(
                         loading: state.fromStatus == FromStatus.loading,
-                        backgroundColor: _validationInput ? null : Colors.grey,
+                        backgroundColor: _validationInput
+                            ? null
+                            : Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.4),
                         margin: EdgeInsets.zero,
                         onTab: state.fromStatus == FromStatus.loading
                             ? null
@@ -165,7 +170,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                     Text(
                       "Profilngiz yo’qmi?",
                       style: AppTextStyle.seoulRobotoRegular.copyWith(
-                        color: AppColors.c010A27,
+                        color: Theme.of(context).colorScheme.secondary,
                         fontSize: 16.sp,
                       ),
                     ),
