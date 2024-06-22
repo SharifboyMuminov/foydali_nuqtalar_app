@@ -25,7 +25,7 @@ class CostumeSliderTextSize extends StatelessWidget {
             "Shrift hajmi",
             style: AppTextStyle.seoulRobotoMedium.copyWith(
               fontSize: 16.sp,
-              color: AppColors.c010A27,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           Row(
@@ -49,7 +49,7 @@ class CostumeSliderTextSize extends StatelessWidget {
               Text(
                 (textStyle.fontSize ?? 16).round().toString(),
                 style: AppTextStyle.seoulRobotoMedium.copyWith(
-                  color: AppColors.c010A27,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontSize: 16.sp,
                 ),
               ),

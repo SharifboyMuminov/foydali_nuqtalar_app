@@ -125,46 +125,7 @@ class _SettingScreenState extends State<SettingScreen> {
               );
             },
           ),
-          appBar: AppBar(
-            centerTitle: true,
-            leading: IconButton(
-              onPressed: () {
-                _key.currentState!.openDrawer();
-              },
-              icon: SvgPicture.asset(
-                AppImages.drawerSvg,
-                width: 24.we,
-                height: 24.we,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.secondary,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            title: fullName.isNotEmpty
-                ? null
-                : AppBarMyButton(
-                    onTab: _onTabRegister,
-                  ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  showSetting = !showSetting;
-                  setState(() {});
-                },
-                icon: SvgPicture.asset(
-                  AppImages.settingSvg,
-                  width: 24.we,
-                  height: 24.we,
-                  colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.secondary,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
-              6.getW(),
-            ],
-          ),
+          appBar: _myAppBar(),
           body: BlocConsumer<BookBloc, BookState>(
             builder: (BuildContext context, BookState bookState) {
               if (bookState.fromStatus == FromStatus.error) {
@@ -330,6 +291,49 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
         );
       },
+    );
+  }
+
+  AppBar _myAppBar() {
+    return AppBar(
+      centerTitle: true,
+      leading: IconButton(
+        onPressed: () {
+          _key.currentState!.openDrawer();
+        },
+        icon: SvgPicture.asset(
+          AppImages.drawerSvg,
+          width: 24.we,
+          height: 24.we,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.secondary,
+            BlendMode.srcIn,
+          ),
+        ),
+      ),
+      title: fullName.isNotEmpty
+          ? null
+          : AppBarMyButton(
+              onTab: _onTabRegister,
+            ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            showSetting = !showSetting;
+            setState(() {});
+          },
+          icon: SvgPicture.asset(
+            AppImages.settingSvg,
+            width: 24.we,
+            height: 24.we,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.secondary,
+              BlendMode.srcIn,
+            ),
+          ),
+        ),
+        6.getW(),
+      ],
     );
   }
 

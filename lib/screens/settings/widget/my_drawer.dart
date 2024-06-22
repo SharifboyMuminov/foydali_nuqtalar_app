@@ -44,33 +44,30 @@ class MyDrawer extends StatelessWidget {
           45.getH(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.we),
-            child: Image.asset(
-              "assets/images/img_1.png",
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "FOYDALI",
+                  style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
+                    fontSize: 14.sp,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                SvgPicture.asset(
+                  AppImages.splashIconSvg,
+                  width: 48.we,
+                  height: 48.we,
+                ),
+                Text(
+                  "NUQTALAR",
+                  style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
+                    fontSize: 16.sp,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+              ],
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Text(
-            //       "FOYDALI",
-            //       style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
-            //         fontSize: 14.sp,
-            //         color: AppColors.c010A27,
-            //       ),
-            //     ),
-            //     SvgPicture.asset(
-            //       AppImages.splashIconSvg,
-            //       width: 48.we,
-            //       height: 48.we,
-            //     ),
-            //     Text(
-            //       "NUQTALAR",
-            //       style: AppTextStyle.seoulPollerOneSemiBold.copyWith(
-            //         fontSize: 16.sp,
-            //         color: AppColors.c010A27,
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ),
           if (fullName.isEmpty)
             GlobalMyButton(
@@ -116,7 +113,7 @@ class MyDrawer extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyle.seoulRobotoRegular.copyWith(
                               fontSize: 16.sp,
-                              color: AppColors.c010A27,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
                           Text(
@@ -125,7 +122,10 @@ class MyDrawer extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyle.seoulRobotoRegular.copyWith(
                               fontSize: 12.sp,
-                              color: AppColors.c010A27.withOpacity(0.4),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.4),
                             ),
                           ),
                         ],

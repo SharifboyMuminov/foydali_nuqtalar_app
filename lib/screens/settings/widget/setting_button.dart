@@ -12,7 +12,8 @@ class SettingButton extends StatelessWidget {
     required this.active,
     this.title,
     this.iconPath,
-    this.padding, this.backgroundColor,
+    this.padding,
+    this.backgroundColor,
   });
 
   final VoidCallback onTab;
@@ -48,8 +49,8 @@ class SettingButton extends StatelessWidget {
               title ?? "",
               style: AppTextStyle.seoulRobotoSemiBold.copyWith(
                 color: active
-                    ? AppColors.c010A27
-                    : AppColors.c010A27.withOpacity(0.4),
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.secondary.withOpacity(0.4),
                 fontSize: 16.sp,
               ),
             )
@@ -58,8 +59,12 @@ class SettingButton extends StatelessWidget {
               width: 24.we,
               height: 24.we,
               colorFilter: ColorFilter.mode(
-                  AppColors.c010A27.withOpacity(active ? 1 : 0.4),
-                  BlendMode.srcIn),
+                Theme.of(context)
+                    .colorScheme
+                    .secondary
+                    .withOpacity(active ? 1 : 0.4),
+                BlendMode.srcIn,
+              ),
             ),
     );
   }

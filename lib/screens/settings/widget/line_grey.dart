@@ -12,7 +12,7 @@ class LenGrey extends StatelessWidget {
       height: (1.5 / 852) * height,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: AppColors.c010A27.withOpacity(0.08),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.08),
         ),
       ),
     );

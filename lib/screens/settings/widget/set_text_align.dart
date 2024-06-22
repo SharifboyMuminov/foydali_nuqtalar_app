@@ -29,7 +29,7 @@ class SetTextAlign extends StatelessWidget {
             "Matn tekkislanishi",
             style: AppTextStyle.seoulRobotoMedium.copyWith(
               fontSize: 16.sp,
-              color: AppColors.c010A27,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           const Spacer(),

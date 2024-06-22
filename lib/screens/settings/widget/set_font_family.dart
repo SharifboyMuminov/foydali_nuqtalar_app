@@ -25,7 +25,7 @@ class SetFontFamily extends StatelessWidget {
             "Shrift",
             style: AppTextStyle.seoulRobotoMedium.copyWith(
               fontSize: 16.sp,
-              color: AppColors.c010A27,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           const Spacer(),
