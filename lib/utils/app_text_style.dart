@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foydali_nuqtalar/utils/app_colors.dart';
 
 class AppTextStyle {
+  AppTextStyle._();
+
   // SeoulNamsan
   static TextStyle seoulRobotoThin = const TextStyle(
     fontFamily: "Roboto",
